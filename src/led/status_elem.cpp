@@ -13,7 +13,7 @@ namespace desk_led{
 		}
 		
 		//draw border
-		for (x=x_l,x<=x_u,++x){
+		for (int x=x_l;x<=x_u;++x){
 			canvas->SetPixel(x,y_l,255,255,255);
 			canvas->SetPixel(x,y_u,255,255,255);
 		}

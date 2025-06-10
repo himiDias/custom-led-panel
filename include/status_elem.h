@@ -1,5 +1,5 @@
-#ifndef PANEL_ELEMENT_H
-#define PANEL_ELEMENT_H
+#ifndef STATUS_ELEMENT_H
+#define STATUS_ELEMENT_H
 
 #include "led-matrix.h"
 #include "graphics.h"

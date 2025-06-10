@@ -29,7 +29,7 @@ int main(){
 	
 	FrameCanvas *canvas = matrix->CreateFrameCanvas();
 	
-	StatusElement test(0,63,0,63);
+	StatusElement test(0,43,0,15);
 	test.draw(canvas);
 	
 	//canvas->SetPixel(5,5,255,0,0);

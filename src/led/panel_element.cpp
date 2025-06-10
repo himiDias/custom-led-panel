@@ -2,7 +2,7 @@
 
 #include "iostream"
 
-namespace desk-led {
+namespace desk_led {
 	PanelElement::PanelElement(int x_lower, int x_upper, int y_lower, int y_upper)
 	:x_l(x_lower),
 	x_u(x_upper),
@@ -17,6 +17,7 @@ namespace desk-led {
 			return true;
 		}
 		return false;
+	}
 	
 	void PanelElement::clear(rgb_matrix::FrameCanvas* canvas) const{
 		if (check_canvas_null(canvas)){
