@@ -20,11 +20,16 @@ namespace desk_led{
 		void clear(rgb_matrix::FrameCanvas* canvas) const;
 		
 		
-		private:
+		
+		
+		protected:
 		int x_l;
 		int x_u;
 		int y_l;
 		int y_u;
+		
+		
+		bool check_canvas_null(rgb_matrix::FrameCanvas* canvas) const;
 	};
 	
 }

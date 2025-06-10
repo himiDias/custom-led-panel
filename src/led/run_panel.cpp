@@ -1,10 +1,16 @@
+// rpi-rgb-led-matrix headers
 #include "led-matrix.h"
 #include "graphics.h"
 
+// custom
+#include "status_elem.h"
+
+// standard
 #include <unistd.h>
 #include <iostream>
 
 using namespace rgb_matrix;
+using namespace desk_led;
 
 int main(){
 	RGBMatrix::Options options;
@@ -22,7 +28,11 @@ int main(){
 	RGBMatrix *matrix = CreateMatrixFromOptions(options,runtime_options);
 	
 	FrameCanvas *canvas = matrix->CreateFrameCanvas();
-	canvas->SetPixel(5,5,255,0,0);
+	
+	StatusElement test(0,63,0,63);
+	test.draw(canvas);
+	
+	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
 	std::cout << "Matrix cleared, Exiting," << std::endl;
 	

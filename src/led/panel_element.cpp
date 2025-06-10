@@ -3,17 +3,23 @@
 #include "iostream"
 
 namespace desk-led {
-	PanelElement::PanelElement(int x_lower, int x_upper, int y_lower, int y_upper):
-	x_l(x_lower),
+	PanelElement::PanelElement(int x_lower, int x_upper, int y_lower, int y_upper)
+	:x_l(x_lower),
 	x_u(x_upper),
 	y_l(y_lower),
 	y_u(y_upper)
 	{}
 	
 	
-	void PanelElement::clear(rgb_matrix::FrameCanvas* canvas) const{
+	bool PanelElement::check_canvas_null(rgb_matrix::FrameCanvas* canvas) const{
 		if (canvas == nullptr){
 			std::cerr << "No canvas passed in\n";
+			return true;
+		}
+		return false;
+	
+	void PanelElement::clear(rgb_matrix::FrameCanvas* canvas) const{
+		if (check_canvas_null(canvas)){
 			return;
 		}
 		
