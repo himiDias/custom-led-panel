@@ -13,6 +13,10 @@ namespace desk_led{
 		StatusElement(int x_lower, int x_upper, int y_lower, int y_upper);
 		
 		void draw(rgb_matrix::FrameCanvas* canvas) const override;
+	};
+	
+}
 		
 		
 		
+#endif
