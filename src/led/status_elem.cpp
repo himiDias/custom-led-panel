@@ -10,7 +10,7 @@ namespace desk_led{
 	:PanelElement(x_lower,x_upper,y_lower,y_upper)
 	{
 		StatusElement::message = "Set Status Message";
-		StatusElement::message_color = rgb_matrix::Color(255,255,255);
+		StatusElement::message_colour = rgb_matrix::Color(255,255,255);
 		StatusElement::x_offset = 0;
 		
 		const char* font_path = "lib/rpi-rgb-led-matrix/fonts/6x10.bdf";
@@ -59,11 +59,11 @@ namespace desk_led{
 		
 	}
 	
-	void StatusElement::scrollText(rgb_matrix::FrameCanvas* canvas) const{
+	void StatusElement::scrollText(rgb_matrix::FrameCanvas* canvas){
 		StatusElement::clearContents(canvas);
 		// gen formular for centering
 		int y_pos = y_u-(y_u-y_l)/4;
-		rgb_matrix::DrawText(canvas,message_font,x_l+1 - x_offset,y_pos,message_color,nullptr,message.c_str());
+		rgb_matrix::DrawText(canvas,message_font,x_l+1 - x_offset,y_pos,message_colour,nullptr,message.c_str());
 		if(x_offset == message_width){
 			x_offset = -x_u;
 		}
@@ -71,6 +71,16 @@ namespace desk_led{
 			x_offset++;
 		}
 		
+	}
+	
+	void StatusElement::setMessage(std::string newMessage){
+		message = newMessage;
+		message_width = 6 * message.length();
+		x_offset = 0;
+	}
+	
+	void StatusElement::setMessageColour(rgb_matrix::Color newColour){
+		message_colour = newColour;
 	}
 		
 		

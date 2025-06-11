@@ -17,16 +17,20 @@ namespace desk_led{
 		
 		void drawBorders(rgb_matrix::FrameCanvas* canvas) const override;
 		
-		void scrollText(rgb_matrix::FrameCanvas* canvas) const;
+		void scrollText(rgb_matrix::FrameCanvas* canvas);
 		
 		void clearContents(rgb_matrix::FrameCanvas* canvas) const;
 		
+		void setMessage(std::string newMessage);
+		
+		void setMessageColour(rgb_matrix::Color newColour);
+		
 		private:
-		mutable std::string message;
-		mutable rgb_matrix::Color message_color;
+		std::string message;
+		rgb_matrix::Color message_colour;
 		rgb_matrix::Font message_font;
-		mutable int x_offset;
-		mutable int message_width;
+		int x_offset;
+		int message_width;
 		
 	};
 	

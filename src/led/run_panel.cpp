@@ -37,13 +37,20 @@ int main(){
 	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
 	
-	//draw again for second canvas buffer, to solve flickering issue
-	test.drawBorders(canvas);
 	
+	int counter = 0;
 	while (true){
 		usleep(50000);
+		counter++;
 		test.scrollText(canvas);
+		test.drawBorders(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
+		if (counter == 200){
+			std::string nm= "Testing changing text";
+			rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
+			test.setMessage(nm);
+			test.setMessageColour(newC);
+		}
 	}
 	
 	std::cout << "Matrix cleared, Exiting," << std::endl;
