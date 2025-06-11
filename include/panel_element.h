@@ -15,9 +15,11 @@ namespace desk_led{
 		
 		virtual ~PanelElement() = default;
 		
-		virtual void draw(rgb_matrix::FrameCanvas* canvas) const = 0;
+		virtual void drawBorders(rgb_matrix::FrameCanvas* canvas) const = 0;
 		
 		void clear(rgb_matrix::FrameCanvas* canvas) const;
+		
+		virtual void clearContents(rgb_matrix::FrameCanvas* canvas) const = 0;
 		
 		
 		

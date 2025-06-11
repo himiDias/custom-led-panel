@@ -24,8 +24,8 @@ namespace desk_led {
 			return;
 		}
 		
-		for (int x=x_l;x<x_u;++x){
-			for (int y=y_l;y<y_u;++y){
+		for (int x=x_l;x<=x_u;++x){
+			for (int y=y_l;y<=y_u;++y){
 				canvas->SetPixel(x,y,0,0,0);
 			}
 		}

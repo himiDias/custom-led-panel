@@ -29,15 +29,27 @@ int main(){
 	
 	FrameCanvas *canvas = matrix->CreateFrameCanvas();
 	
-	StatusElement test(0,43,0,15);
-	test.draw(canvas);
+	//arbitrary values for x,y boudns
+	StatusElement test(0,43,0,10);
+	test.drawBorders(canvas);
+	test.scrollText(canvas);
 	
 	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
+	
+	//draw again for second canvas buffer, to solve flickering issue
+	test.drawBorders(canvas);
+	
+	while (true){
+		usleep(50000);
+		test.scrollText(canvas);
+		canvas = matrix -> SwapOnVSync(canvas);
+	}
+	
 	std::cout << "Matrix cleared, Exiting," << std::endl;
 	
 	
-	sleep(2);
+	sleep(50);
 	delete matrix;
 	return 0;
 }
