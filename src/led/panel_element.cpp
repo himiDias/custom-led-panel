@@ -30,6 +30,38 @@ namespace desk_led {
 			}
 		}
 	}
+	
+	void PanelElement::drawBorders(rgb_matrix::FrameCanvas* canvas) const{
+		if (PanelElement::check_canvas_null(canvas)){
+			return;
+		}
+		
+		//draw border
+		for (int x=x_l;x<=x_u;++x){
+			canvas->SetPixel(x,y_l,255,255,255);
+			canvas->SetPixel(x,y_u,255,255,255);
+		}
+		
+		for (int y=y_l;y<y_u;++y){
+			canvas->SetPixel(x_l,y,255,255,255);
+			canvas->SetPixel(x_u,y,255,255,255);
+		}
+		
+		
+		
+	}
+	
+	void PanelElement::clearContents(rgb_matrix::FrameCanvas* canvas) const{
+		if (check_canvas_null(canvas)){
+			return;
+		}
+		
+		for (int x=x_l+1;x<x_u;++x){
+			for (int y=y_l+1;y<y_u;++y){
+				canvas->SetPixel(x,y,0,0,0);
+			}
+		}
+	}
 }
 	
 	

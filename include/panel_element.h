@@ -18,14 +18,15 @@ namespace desk_led{
 		
 		virtual ~PanelElement() = default;
 		
-		// Draws in artificial boundary for element (NOTE to slef, WHY IS THIS VIRTUAL, is gonna be same for all)
-		virtual void drawBorders(rgb_matrix::FrameCanvas* canvas) const = 0;
+		// Draws in artificial boundary for element 
+		void drawBorders(rgb_matrix::FrameCanvas* canvas) const;
+		
+		// Clear content within the bounds of the element  
+		void clearContents(rgb_matrix::FrameCanvas* canvas) const;
 		
 		//Clears all area including borders
 		void clear(rgb_matrix::FrameCanvas* canvas) const;
 		
-		//Clears only content within borders (NOTE to sletf, WHY IS THIS VIRTUAL, is gonna be same for all)
-		virtual void clearContents(rgb_matrix::FrameCanvas* canvas) const = 0;
 		
 		
 		
