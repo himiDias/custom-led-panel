@@ -24,11 +24,14 @@ namespace desk_led{
 		void setMessageColour(rgb_matrix::Color newColour);
 		
 		private:
-		std::string message;
-		rgb_matrix::Color message_colour;
+		std::string message = "Set Status Message";
+		
+		rgb_matrix::Color message_colour = rgb_matrix::Color(255,255,255);
 		rgb_matrix::Font message_font;
-		int x_offset;
-		int message_width;
+		
+		const char* font_path = "lib/rpi-rgb-led-matrix/fonts/6x10.bdf";
+		int x_offset =0;
+		int message_width = 6 * message.length();;
 		
 	};
 	
