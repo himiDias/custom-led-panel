@@ -19,7 +19,7 @@ namespace desk_led{
 		
 	}
 	
-	// Date_message not used currently, no space with current plan to display ( add later, allow to set in settings)
+	//
 	void TimeElement::updateTime(){
 		current_time = time(nullptr);
 		local_time = localtime(&current_time);

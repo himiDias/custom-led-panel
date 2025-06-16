@@ -10,7 +10,6 @@
 #include <ctime>
 
 //Should use the RTC embedded into HAT, no cell battery so for now USING C LIB INSTEAD, CHANGE LATER WHEN CELL ACQUIRED
-// LATER, ADD OPTION TO SELECT BOTH TIME AND DATE, FOR NOW CAN ONLY SHOW ONE
 namespace desk_led{
 	
 	class TimeElement : public PanelElement {
@@ -24,10 +23,13 @@ namespace desk_led{
 		// method to draw time, also updates and draws
 		void drawTime(rgb_matrix::FrameCanvas* canvas);
 		
+		// Used to set whether to show time or not
 		void showTime(bool value);
 		
+		//used to set whether to show date or not
 		void showDate(bool value);
 		
+		// set font colour
 		void setTimeColour(rgb_matrix::Color newColour);
 		
 		
