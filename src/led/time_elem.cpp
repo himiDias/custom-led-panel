@@ -19,7 +19,7 @@ namespace desk_led{
 		
 	}
 	
-	//
+	
 	void TimeElement::updateTime(){
 		current_time = time(nullptr);
 		local_time = localtime(&current_time);
