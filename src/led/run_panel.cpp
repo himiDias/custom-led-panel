@@ -31,7 +31,7 @@ int main(){
 	FrameCanvas *canvas = matrix->CreateFrameCanvas();
 	
 	//arbitrary values for x,y boudns
-	StatusElement test(0,43,0,10);
+	StatusElement test(0,63,0,10);
 	test.drawBorders(canvas);
 	test.scrollText(canvas);
 	
