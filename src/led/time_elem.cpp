@@ -12,7 +12,7 @@ namespace desk_led{
 	:PanelElement(x_lower,x_upper,y_lower,y_upper)
 	{
 			
-		if (!time_font.LoadFont(font_path)){
+		if (!time_font.LoadFont(s_font_path)){
 			std::cerr << "Error, could not load font\n";
 			return;
 		}
@@ -25,27 +25,38 @@ namespace desk_led{
 		local_time = localtime(&current_time);
 		
 		
-		time_message = std::to_string(local_time->tm_hour) + ":" + std::to_string(local_time->tm_min);
+		time_message = std::to_string(local_time->tm_hour) + ":" + (local_time->tm_min < 10 ? "0" + std::to_string(local_time->tm_min) : std::to_string(local_time->tm_min));
 		date_message = std::to_string(local_time->tm_mday) + "/" + std::to_string(local_time->tm_mon + 1) + "/" + std::to_string(1900 + local_time->tm_year);
 	}
 	
 	void TimeElement::drawTime(rgb_matrix::FrameCanvas* canvas){
 		clearContents(canvas);
 		updateTime();
-		
+		int width;
 		if (display_time && display_date){
+			if (!time_font.LoadFont(s_font_path)){
+				std::cerr << "Error, could not load font\n";
+				return;
+			}
 			display_message = time_message + " " + date_message;
-		}else if(display_time){
-			display_message = time_message;
+			width = display_message.length() * 4;
 		}else{
-			display_message = date_message;
+			if (!time_font.LoadFont(l_font_path)){
+				std::cerr << "Error, could not load font\n";
+				return;
+			}
+			if(display_time){
+				display_message = time_message;
+			}else{
+				display_message = date_message;
+			}
+			width = display_message.length() * 6;
 		}
 		
 		//centering y and x direction
 		int y_pos = y_u-(y_u-y_l)/4;
 		
-		//currently uses arbitrary value of 4, as font is same,CHANGE WHEN Increasing font size for single dispaly
-		int width = display_message.length() * 4;
+		//centetrs using message widtrh
 		int x_pos = (x_u-x_l)/2 - (width/2)+1;
 		
 		rgb_matrix::DrawText(canvas,time_font,x_pos,y_pos,time_colour,nullptr,display_message.c_str());

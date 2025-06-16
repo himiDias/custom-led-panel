@@ -43,7 +43,8 @@ namespace desk_led{
 		std::string date_message = "Set date";
 		std::string display_message = time_message + date_message;
 		
-		const char* font_path = "lib/rpi-rgb-led-matrix/fonts/4x6.bdf";
+		const char* s_font_path = "lib/rpi-rgb-led-matrix/fonts/4x6.bdf";
+		const char* l_font_path = "lib/rpi-rgb-led-matrix/fonts/6x10.bdf";
 		bool display_time = true;
 		bool display_date = true;
 		
