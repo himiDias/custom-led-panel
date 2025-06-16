@@ -37,7 +37,7 @@ int main(){
 	
 	TimeElement test_time(43,63,0,10);
 	test_time.drawBorders(canvas);
-	test_time.printTime();
+	test_time.printTime(canvas);
 	
 	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
