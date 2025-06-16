@@ -37,26 +37,31 @@ int main(){
 	
 	TimeElement test_time(43,63,0,10);
 	test_time.drawBorders(canvas);
-	test_time.printTime(canvas);
+	test_time.drawTime(canvas);
 	
 	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
 	
 	
+	// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION
+	
+	
 	int counter = 0;
 	while (true){
-		/*
+		
 		usleep(50000);
 		counter++;
-		test.scrollText(canvas);
-		test.drawBorders(canvas);
+		test_time.drawTime(canvas);
+		//test.scrollText(canvas);
+		//test.drawBorders(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
 		if (counter == 200){
-			std::string nm= "Testing changing text";
+			//std::string nm= "Testing changing text";
 			rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
-			test.setMessage(nm);
-			test.setMessageColour(newC);
-		}*/
+			//test.setMessage(nm);
+			//test.setMessageColour(newC);
+			test_time.showDate();
+		}
 	}
 	
 	std::cout << "Matrix cleared, Exiting," << std::endl;
