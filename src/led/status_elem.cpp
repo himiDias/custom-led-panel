@@ -21,11 +21,13 @@ namespace desk_led{
 		int y_pos = y_u-(y_u-y_l)/4;
 		
 		rgb_matrix::DrawText(canvas,message_font,x_l+1 - x_offset,y_pos,message_colour,nullptr,message.c_str());
-		if(x_offset == message_width){
-			x_offset = -x_u;
-		}
-		else{
-			x_offset++;
+		if (message_width > x_u-x_l){
+			if(x_offset == message_width){
+				x_offset = -x_u;
+			}
+			else{
+				x_offset++;
+			}
 		}
 		
 	}

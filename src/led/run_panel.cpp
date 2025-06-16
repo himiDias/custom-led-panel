@@ -30,7 +30,7 @@ int main(){
 	FrameCanvas *canvas = matrix->CreateFrameCanvas();
 	
 	//arbitrary values for x,y boudns
-	StatusElement test(0,43,0,10);
+	StatusElement test(0,63,0,10);
 	test.drawBorders(canvas);
 	test.scrollText(canvas);
 	
@@ -46,7 +46,7 @@ int main(){
 		test.drawBorders(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
 		if (counter == 200){
-			std::string nm= "Testing changing text";
+			std::string nm= "Test small";
 			rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
 			test.setMessage(nm);
 			test.setMessageColour(newC);
