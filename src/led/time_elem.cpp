@@ -11,13 +11,8 @@ namespace desk_led{
 	TimeElement::TimeElement(int x_lower, int x_upper, int y_lower, int y_upper)
 	:PanelElement(x_lower,x_upper,y_lower,y_upper)
 	{
-		TimeElement::display_message = &time_message;
-		TimeElement::time_message = "Set time";
-		TimeElement::time_colour = rgb_matrix::Color(255,255,255);
-		
-		const char* font_path = "lib/rpi-rgb-led-matrix/fonts/4x6.bdf";
-		
-		if (!TimeElement::time_font.LoadFont(font_path)){
+			
+		if (!time_font.LoadFont(font_path)){
 			std::cerr << "Error, could not load font\n";
 			return;
 		}
@@ -31,23 +26,31 @@ namespace desk_led{
 		
 		
 		time_message = std::to_string(local_time->tm_hour) + ":" + std::to_string(local_time->tm_min);
-		date_message = std::to_string(local_time->tm_mday) + "/" + std::to_string(local_time->tm_mon + 1) + "/" + std::to_string(local_time->tm_year);
+		date_message = std::to_string(local_time->tm_mday) + "/" + std::to_string(local_time->tm_mon + 1) + "/" + std::to_string(1900 + local_time->tm_year);
 	}
 	
 	void TimeElement::drawTime(rgb_matrix::FrameCanvas* canvas){
-		TimeElement::clearContents(canvas);
-		TimeElement::updateTime();
+		clearContents(canvas);
+		updateTime();
+		
+		if (display_time && display_date){
+			display_message = time_message + " " + date_message;
+		}else if(display_time){
+			display_message = time_message;
+		}else{
+			display_message = date_message;
+		}
 		
 		int y_pos = y_u-(y_u-y_l)/4;
-		rgb_matrix::DrawText(canvas,time_font,x_l+1,y_pos,time_colour,nullptr,(*display_message).c_str());
+		rgb_matrix::DrawText(canvas,time_font,x_l+1,y_pos,time_colour,nullptr,display_message.c_str());
 	}
 	
-	void TimeElement::showTime(){
-		display_message = &time_message;
+	void TimeElement::showTime(bool value){
+		display_time = value;
 	}
 	
-	void TimeElement::showDate(){
-		display_message = &date_message;
+	void TimeElement::showDate(bool value){
+		display_date = value;
 	}
 	
 	void TimeElement::setTimeColour(rgb_matrix::Color newColour){

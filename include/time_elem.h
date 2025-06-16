@@ -24,23 +24,26 @@ namespace desk_led{
 		// method to draw time, also updates and draws
 		void drawTime(rgb_matrix::FrameCanvas* canvas);
 		
-		void showTime();
+		void showTime(bool value);
 		
-		void showDate();
+		void showDate(bool value);
 		
 		void setTimeColour(rgb_matrix::Color newColour);
 		
 		
 		private:
 		rgb_matrix::Font time_font;
-		rgb_matrix::Color time_colour;
+		rgb_matrix::Color time_colour = rgb_matrix::Color(255,255,255);
+	
 		std::time_t current_time;
 		std::tm* local_time;
-		std::string time_message;
-		std::string date_message;
-		std::string* display_message;
+		std::string time_message = "Set time";
+		std::string date_message = "Set date";
+		std::string display_message = time_message + date_message;
 		
-		 
+		const char* font_path = "lib/rpi-rgb-led-matrix/fonts/4x6.bdf";
+		bool display_time = true;
+		bool display_date = true;
 		
 	};
 	
