@@ -12,7 +12,7 @@ namespace desk_led{
 	:PanelElement(x_lower,x_upper,y_lower,y_upper)
 	{
 			
-		if (!time_font.LoadFont(s_font_path)){
+		if (!message_font.LoadFont(s_font_path)){
 			std::cerr << "Error, could not load font\n";
 			return;
 		}
@@ -34,14 +34,14 @@ namespace desk_led{
 		updateTime();
 		int width;
 		if (display_time && display_date){
-			if (!time_font.LoadFont(s_font_path)){
+			if (!message_font.LoadFont(s_font_path)){
 				std::cerr << "Error, could not load font\n";
 				return;
 			}
 			display_message = time_message + " " + date_message;
 			width = display_message.length() * 4;
 		}else{
-			if (!time_font.LoadFont(l_font_path)){
+			if (!message_font.LoadFont(l_font_path)){
 				std::cerr << "Error, could not load font\n";
 				return;
 			}
@@ -59,7 +59,7 @@ namespace desk_led{
 		//centetrs using message widtrh
 		int x_pos = (x_u-x_l)/2 - (width/2)+1;
 		
-		rgb_matrix::DrawText(canvas,time_font,x_pos,y_pos,time_colour,nullptr,display_message.c_str());
+		rgb_matrix::DrawText(canvas,message_font,x_pos,y_pos,message_colour,nullptr,display_message.c_str());
 	}
 	
 	void TimeElement::showTime(bool value){
@@ -71,6 +71,6 @@ namespace desk_led{
 	}
 	
 	void TimeElement::setTimeColour(rgb_matrix::Color newColour){
-		time_colour = newColour;
+		message_colour = newColour;
 	}
 }

@@ -34,8 +34,8 @@ namespace desk_led{
 		
 		
 		private:
-		rgb_matrix::Font time_font;
-		rgb_matrix::Color time_colour = rgb_matrix::Color(255,255,255);
+		rgb_matrix::Font message_font;
+		rgb_matrix::Color message_colour = rgb_matrix::Color(255,255,255);
 	
 		std::time_t current_time;
 		std::tm* local_time;
