@@ -41,8 +41,14 @@ namespace desk_led{
 			display_message = date_message;
 		}
 		
+		//centering y and x direction
 		int y_pos = y_u-(y_u-y_l)/4;
-		rgb_matrix::DrawText(canvas,time_font,x_l+1,y_pos,time_colour,nullptr,display_message.c_str());
+		
+		//currently uses arbitrary value of 4, as font is same,CHANGE WHEN Increasing font size for single dispaly
+		int width = display_message.length() * 4;
+		int x_pos = (x_u-x_l)/2 - (width/2)+1;
+		
+		rgb_matrix::DrawText(canvas,time_font,x_pos,y_pos,time_colour,nullptr,display_message.c_str());
 	}
 	
 	void TimeElement::showTime(bool value){

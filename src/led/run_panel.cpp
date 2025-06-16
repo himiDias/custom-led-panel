@@ -46,25 +46,31 @@ int main(){
 	// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION (2nd is integrated, not as efficient, change later)
 	
 	
-	//int counter = 0;
+	int counter = 0;
 	while (true){
 		
 		usleep(50000);
-		//counter++;
+		counter++;
 		test_time.drawTime(canvas);
 		//test.scrollText(canvas);
 		test.drawBorders(canvas);
 		test_time.drawBorders(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
-		/*
+		
 		if (counter == 200){
 			//std::string nm= "Testing changing text";
-			rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
+			//rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
 			//test.setMessage(nm);
 			//test.setMessageColour(newC);
-			test_time.setTimeColour(newC);
-			test_time.showDate();
-		}*/
+			//test_time.setTimeColour(newC);
+			test_time.showDate(false);
+		}
+		if (counter == 400){
+			test_time.showTime(false);
+		}
+		if (counter == 600){
+			test_time.showDate(true);
+		}
 	}
 	
 	std::cout << "Matrix cleared, Exiting," << std::endl;
