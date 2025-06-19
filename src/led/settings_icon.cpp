@@ -3,6 +3,8 @@
 
 #include "settings_icon.h"
 
+#include <iostream>
+
 namespace desk_led{
 	IconSettings::IconSettings(int x_lower, int x_upper, int y_lower, int y_upper)
 	:IconElement(x_lower,x_upper,y_lower,y_upper)
@@ -12,6 +14,7 @@ namespace desk_led{
 	
 	void IconSettings::drawIcon(rgb_matrix::FrameCanvas* canvas) const{
 		check_canvas_null(canvas);
+		drawBorders(canvas);
 		// draw selection border
 		if (selected){
 			for (int x=x_l+2;x<=x_u-2;++x){
@@ -25,8 +28,9 @@ namespace desk_led{
 			}	
 		}
 		
-		int x_pos = (x_u-x_l)/2;
-		int y_pos = (y_u-y_l)/2;
+		int x_pos = x_l + (x_u-x_l)/2;
+		int y_pos = y_l + (y_u-y_l)/2;
+		std::cout<<"x,y:"<<x_pos<<y_pos<<std::endl;
 		//draw icon
 		DrawCircle(canvas,x_pos,y_pos,3,rgb_matrix::Color(255,255,255));
 		

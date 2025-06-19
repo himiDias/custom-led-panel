@@ -23,7 +23,7 @@ namespace desk_led{
 		
 		private:
 
-		std::vector<IconElement> options;
+		std::vector<IconElement*> options;
 		IconElement* selected = nullptr;
 		
 	};

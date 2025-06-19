@@ -5,6 +5,7 @@
 // custom
 #include "status_elem.h"
 #include "time_elem.h"
+#include "main_elem.h"
 
 // standard
 #include <unistd.h>
@@ -39,6 +40,10 @@ int main(){
 	test_time.drawBorders(canvas);
 	test_time.drawTime(canvas);
 	
+	MainElement test_main(0,63,10,53);
+	test_main.drawBorders(canvas);
+	test_main.drawOptions(canvas);
+	
 	//canvas->SetPixel(5,5,255,0,0);
 	canvas = matrix -> SwapOnVSync(canvas);
 	
@@ -52,9 +57,10 @@ int main(){
 		usleep(50000);
 		counter++;
 		test_time.drawTime(canvas);
-		//test.scrollText(canvas);
+		test.scrollText(canvas);
 		test.drawBorders(canvas);
 		test_time.drawBorders(canvas);
+		test_main.drawBorders(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
 		
 		if (counter == 200){
