@@ -30,10 +30,105 @@ namespace desk_led{
 		
 		int x_pos = x_l + (x_u-x_l)/2;
 		int y_pos = y_l + (y_u-y_l)/2;
-		std::cout<<"x,y:"<<x_pos<<y_pos<<std::endl;
+		//std::cout<<"x,y:"<<x_pos<<y_pos<<std::endl;
 		//draw icon
 		DrawCircle(canvas,x_pos,y_pos,3,rgb_matrix::Color(255,255,255));
+		DrawCircle(canvas,x_pos,y_pos,5,rgb_matrix::Color(255,255,255));
 		
-			
+
+		
+		
+		//draw cogs
+		//cog left
+		canvas->SetPixel(x_pos-5,y_pos,0,0,0);
+		
+		canvas->SetPixel(x_pos-6,y_pos-1,255,255,255);
+		canvas->SetPixel(x_pos-7,y_pos-1,255,255,255);
+		
+		canvas->SetPixel(x_pos-6,y_pos+1,255,255,255);
+		canvas->SetPixel(x_pos-7,y_pos+1,255,255,255);
+		
+		canvas->SetPixel(x_pos-7,y_pos,255,255,255);
+		
+		//cog left down
+		canvas->SetPixel(x_pos-4,y_pos+3,0,0,0);
+		canvas->SetPixel(x_pos-3,y_pos+4,0,0,0);
+		
+		canvas->SetPixel(x_pos-5,y_pos+3,255,255,255);
+		canvas->SetPixel(x_pos-6,y_pos+4,255,255,255);
+		
+		canvas->SetPixel(x_pos-3,y_pos+5,255,255,255);
+		canvas->SetPixel(x_pos-4,y_pos+6,255,255,255);
+		
+		canvas->SetPixel(x_pos-5,y_pos+5,255,255,255);
+		
+		//cog down
+		canvas->SetPixel(x_pos,y_pos+5,0,0,0);
+		
+		canvas->SetPixel(x_pos-1,y_pos+6,255,255,255);
+		canvas->SetPixel(x_pos-1,y_pos+7,255,255,255);
+		
+		canvas->SetPixel(x_pos+1,y_pos+6,255,255,255);
+		canvas->SetPixel(x_pos+1,y_pos+7,255,255,255);
+		
+		canvas->SetPixel(x_pos,y_pos+7,255,255,255);
+		
+		//cog right down
+		canvas->SetPixel(x_pos+4,y_pos+3,0,0,0);
+		canvas->SetPixel(x_pos+3,y_pos+4,0,0,0);
+		
+		canvas->SetPixel(x_pos+5,y_pos+3,255,255,255);
+		canvas->SetPixel(x_pos+6,y_pos+4,255,255,255);
+		
+		canvas->SetPixel(x_pos+3,y_pos+5,255,255,255);
+		canvas->SetPixel(x_pos+4,y_pos+6,255,255,255);
+		
+		canvas->SetPixel(x_pos+5,y_pos+5,255,255,255);
+		
+		//cog right
+		canvas->SetPixel(x_pos+5,y_pos,0,0,0);
+		
+		canvas->SetPixel(x_pos+6,y_pos-1,255,255,255);
+		canvas->SetPixel(x_pos+7,y_pos-1,255,255,255);
+		
+		canvas->SetPixel(x_pos+6,y_pos+1,255,255,255);
+		canvas->SetPixel(x_pos+7,y_pos+1,255,255,255);
+		
+		canvas->SetPixel(x_pos+7,y_pos,255,255,255);
+		
+		//cog right up
+		canvas->SetPixel(x_pos+4,y_pos-3,0,0,0);
+		canvas->SetPixel(x_pos+3,y_pos-4,0,0,0);
+		
+		canvas->SetPixel(x_pos+5,y_pos-3,255,255,255);
+		canvas->SetPixel(x_pos+6,y_pos-4,255,255,255);
+		
+		canvas->SetPixel(x_pos+3,y_pos-5,255,255,255);
+		canvas->SetPixel(x_pos+4,y_pos-6,255,255,255);
+		
+		canvas->SetPixel(x_pos+5,y_pos-5,255,255,255);
+		
+		//cog up
+		canvas->SetPixel(x_pos,y_pos-5,0,0,0);
+		
+		canvas->SetPixel(x_pos-1,y_pos-6,255,255,255);
+		canvas->SetPixel(x_pos-1,y_pos-7,255,255,255);
+		
+		canvas->SetPixel(x_pos+1,y_pos-6,255,255,255);
+		canvas->SetPixel(x_pos+1,y_pos-7,255,255,255);
+		
+		canvas->SetPixel(x_pos,y_pos-7,255,255,255);
+		
+		//cog left up
+		canvas->SetPixel(x_pos-4,y_pos-3,0,0,0);
+		canvas->SetPixel(x_pos-3,y_pos-4,0,0,0);
+		
+		canvas->SetPixel(x_pos-5,y_pos-3,255,255,255);
+		canvas->SetPixel(x_pos-6,y_pos-4,255,255,255);
+		
+		canvas->SetPixel(x_pos-3,y_pos-5,255,255,255);
+		canvas->SetPixel(x_pos-4,y_pos-6,255,255,255);
+		
+		canvas->SetPixel(x_pos-5,y_pos-5,255,255,255);
 	}
 }

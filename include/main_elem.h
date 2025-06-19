@@ -20,6 +20,9 @@ namespace desk_led{
 		
 		void drawSelected(rgb_matrix::FrameCanvas* canvas) const;
 		
+		//currently using this to free memory, CONSIDER smart pointers
+		void deleteOptions();
+		
 		
 		private:
 
