@@ -14,7 +14,7 @@ namespace desk_led{
 		
 		IconSettings(int x_lower, int x_upper, int y_lower, int y_upper);
 		
-		void drawSettingsIcon(rgb_matrix::FrameCanvas* canvas);
+		void drawIcon(rgb_matrix::FrameCanvas* canvas) const override;
 		
 	};
 }

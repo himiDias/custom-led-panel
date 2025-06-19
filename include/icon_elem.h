@@ -14,6 +14,8 @@ namespace desk_led{
 		
 		IconElement(int x_lower, int x_upper, int y_lower, int y_upper);
 		
+		virtual void drawIcon(rgb_matrix::FrameCanvas* canvas) const;
+		
 		void setSelected();
 		
 		void setDeselected();
