@@ -11,7 +11,7 @@ namespace desk_led{
 	}
 	
 	void IconSettings::drawSettingsIcon(rgb_matrix::FrameCanvas* canvas){
-		//PanelElement::check_canvas_null(canvas);
+		check_canvas_null(canvas);
 		// draw selection border
 		if (selected){
 			for (int x=x_l+2;x<=x_u-2;++x){
