@@ -20,7 +20,9 @@ INC_PATHS = -I$(INCLUDE_DIR) -I$(LIB_DIR)/rpi-rgb-led-matrix/include
 SOURCES = $(SRC_DIR)/led/run_panel.cpp \
 $(SRC_DIR)/led/panel_element.cpp \
 $(SRC_DIR)/led/status_elem.cpp \
-$(SRC_DIR)/led/time_elem.cpp
+$(SRC_DIR)/led/time_elem.cpp \
+$(SRC_DIR)/led/icon_elem.cpp \
+$(SRC_DIR)/led/settings_icon.cpp \
 
 OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 
