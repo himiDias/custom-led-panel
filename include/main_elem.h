@@ -5,6 +5,7 @@
 #include "graphics.h"
 
 #include "panel_element.h"
+#include "icon_elem.h"
 
 #include <string>
 #include <vector>
@@ -22,8 +23,8 @@ namespace desk_led{
 		
 		private:
 
-		vector<PanelElement> options;
-		PanelElement selected;
+		std::vector<IconElement> options;
+		IconElement* selected = nullptr;
 		
 	};
 	
