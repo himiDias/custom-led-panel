@@ -2,7 +2,6 @@
 #include "graphics.h"
 
 #include "settings_icon.h"
-#include "panel_element.h"
 
 namespace desk_led{
 	IconSettings::IconSettings(int x_lower, int x_upper, int y_lower, int y_upper)
@@ -11,7 +10,7 @@ namespace desk_led{
 		
 	}
 	
-	void drawSettingsIcon(rgb_matrix::FrameCanvas* canvas){
+	void IconSettings::drawSettingsIcon(rgb_matrix::FrameCanvas* canvas){
 		//PanelElement::check_canvas_null(canvas);
 		// draw selection border
 		if (selected){
