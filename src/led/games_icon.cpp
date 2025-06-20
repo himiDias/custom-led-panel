@@ -11,7 +11,7 @@ namespace desk_led{
 		
 	}
 	
-	IconGames::drawIcon(rgb_matrix::FrameCanvas* canvas){
+	void IconGames::drawIcon(rgb_matrix::FrameCanvas* canvas){
 		check_canvas_null(canvas);
 		drawBorders(canvas);
 		int r,g,b;
@@ -49,10 +49,106 @@ namespace desk_led{
 		int x_pos = (x_l + (x_u-x_l)/2);
 		int y_pos = (y_l + (y_u-y_l)/2);
 		
-		DrawCircle(canvas,x_pos+5,y_pos-4,1,*currentColor);
-		DrawCircle(canvas,x_pos+5,y_pos+4,1,*currentColor);
-		DrawCircle(canvas,x_pos+9,y_pos,1,*currentColor);
-		DrawCircle(canvas,x_pos+1,y_pos,1,*currentColor);
+		//butons
+		DrawCircle(canvas,x_pos+6,y_pos-4,1,*currentColor);
+		DrawCircle(canvas,x_pos+6,y_pos+2,1,*currentColor);
+		DrawCircle(canvas,x_pos+9,y_pos-1,1,*currentColor);
+		DrawCircle(canvas,x_pos+3,y_pos-1,1,*currentColor);
+		
+		//d pad
+		canvas->SetPixel(x_pos-7,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-7,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-8,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-8,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-9,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-9,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-9,y_pos-2,r,g,b);
+		
+		canvas->SetPixel(x_pos-1,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-2,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-2,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos-2,r,g,b);
+		
+		canvas->SetPixel(x_pos-4,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-5,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos+3,r,g,b);
+		
+		canvas->SetPixel(x_pos-4,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos-5,r,g,b);
+		canvas->SetPixel(x_pos-5,y_pos-5,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos-5,r,g,b);
+		
+		canvas->SetPixel(x_pos-6,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos,r,g,b);
+		
+		//body
+		for (int x = x_pos-9; x < x_pos + 11;x++){
+			canvas->SetPixel(x,y_pos-7,r,g,b);
+		}
+		canvas->SetPixel(x_pos-10,y_pos-6,r,g,b);
+		canvas->SetPixel(x_pos+11,y_pos-6,r,g,b);
+		canvas->SetPixel(x_pos-10,y_pos-5,r,g,b);
+		canvas->SetPixel(x_pos+11,y_pos-5,r,g,b);
+		
+		canvas->SetPixel(x_pos-11,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos+12,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos-11,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos+12,y_pos-3,r,g,b);
+		
+		canvas->SetPixel(x_pos-12,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos+13,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-12,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos+13,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-12,y_pos,r,g,b);
+		canvas->SetPixel(x_pos+13,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-12,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos+13,y_pos+1,r,g,b);
+		
+		canvas->SetPixel(x_pos-13,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos+14,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos-13,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos+14,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-13,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos+14,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos-13,y_pos+5,r,g,b);
+		canvas->SetPixel(x_pos+14,y_pos+5,r,g,b);
+		canvas->SetPixel(x_pos-13,y_pos+6,r,g,b);
+		canvas->SetPixel(x_pos+14,y_pos+6,r,g,b);
+		
+		canvas->SetPixel(x_pos-12,y_pos+7,r,g,b);
+		canvas->SetPixel(x_pos+13,y_pos+7,r,g,b);
+		
+		canvas->SetPixel(x_pos-11,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos+12,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-10,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos+11,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-9,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos+10,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-8,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos+9,y_pos+8,r,g,b);
+		
+		canvas->SetPixel(x_pos-7,y_pos+7,r,g,b);
+		canvas->SetPixel(x_pos+8,y_pos+7,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos+6,r,g,b);
+		canvas->SetPixel(x_pos+7,y_pos+6,r,g,b);
+		
+		for (int x = x_pos-5;x<x_pos+7;x++){
+			canvas->SetPixel(x,y_pos+5,r,g,b);
+		}
+		
+		 
 	}
 	
 }
