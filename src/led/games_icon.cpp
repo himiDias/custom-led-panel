@@ -48,6 +48,11 @@ namespace desk_led{
 		
 		int x_pos = (x_l + (x_u-x_l)/2);
 		int y_pos = (y_l + (y_u-y_l)/2);
+		
+		DrawCircle(canvas,x_pos+5,y_pos-4,1,*currentColor);
+		DrawCircle(canvas,x_pos+5,y_pos+4,1,*currentColor);
+		DrawCircle(canvas,x_pos+9,y_pos,1,*currentColor);
+		DrawCircle(canvas,x_pos+1,y_pos,1,*currentColor);
 	}
 	
 }
