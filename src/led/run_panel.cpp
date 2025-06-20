@@ -61,6 +61,7 @@ int main(){
 		test.drawBorders(canvas);
 		test_time.drawBorders(canvas);
 		test_main.drawBorders(canvas);
+		test_main.drawOptions(canvas);
 		canvas = matrix -> SwapOnVSync(canvas);
 		
 		if (counter == 200){
@@ -76,6 +77,8 @@ int main(){
 		}
 		if (counter == 600){
 			test_time.showDate(true);
+			std::cout << "Deleted option\n";
+			test_main.deleteOptions();
 		}
 	}
 	

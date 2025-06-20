@@ -1,5 +1,5 @@
-#ifndef ICON_SETTINGS_H
-#define ICON_SETTINGS_H
+#ifndef ICON_SS_H
+#define ICON_SS_H
 
 #include "led-matrix.h"
 #include "graphics.h"
@@ -9,10 +9,10 @@
 #include <string>
 
 namespace desk_led{
-	class IconSettings : public IconElement{
+	class IconSS : public IconElement{
 		public:
 		
-		IconSettings(int x_lower, int x_upper, int y_lower, int y_upper);
+		IconSS(int x_lower, int x_upper, int y_lower, int y_upper);
 		
 		void drawIcon(rgb_matrix::FrameCanvas* canvas) override;
 		

@@ -12,7 +12,7 @@ namespace desk_led{
 		
 	}
 	
-	void IconElement::drawIcon(rgb_matrix::FrameCanvas* canvas)const{
+	void IconElement::drawIcon(rgb_matrix::FrameCanvas* canvas){
 		std::cout << "Test, not being overriden\n";
 	}
 	
@@ -23,5 +23,10 @@ namespace desk_led{
 	void IconElement::setDeselected(){
 		selected = false;
 	}
+	
+	
+	
+	
+	
 }
 

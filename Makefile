@@ -24,6 +24,9 @@ $(SRC_DIR)/led/time_elem.cpp \
 $(SRC_DIR)/led/main_elem.cpp \
 $(SRC_DIR)/led/icon_elem.cpp \
 $(SRC_DIR)/led/settings_icon.cpp \
+$(SRC_DIR)/led/display_icon.cpp \
+$(SRC_DIR)/led/games_icon.cpp \
+$(SRC_DIR)/led/screensaver_icon.cpp \
 
 OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
 
