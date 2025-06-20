@@ -27,6 +27,8 @@ namespace desk_led{
 		//Clears all area including borders
 		void clear(rgb_matrix::FrameCanvas* canvas) const;
 		
+		// Checks canvas
+		bool check_canvas_null(rgb_matrix::FrameCanvas* canvas) const;
 		
 		
 		
@@ -38,7 +40,6 @@ namespace desk_led{
 		int y_u;
 		
 		
-		bool check_canvas_null(rgb_matrix::FrameCanvas* canvas) const;
 	};
 	
 }
