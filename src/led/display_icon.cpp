@@ -47,6 +47,53 @@ namespace desk_led{
 		g = currentColor->g;
 		b = currentColor->b;
 		
+		int x_pos = (x_l + (x_u-x_l)/2)+3;
+		int y_pos = (y_l + (y_u-y_l)/2)-1;
+		
+		//brush end
+		DrawCircle(canvas,x_pos-6,y_pos+5,2,*currentColor);
+		
+		canvas->SetPixel(x_pos-6,y_pos+7,0,0,0);
+		canvas->SetPixel(x_pos-7,y_pos+7,0,0,0);
+		canvas->SetPixel(x_pos-5,y_pos+3,0,0,0);
+		
+		canvas->SetPixel(x_pos-5,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos-6,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-7,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-8,y_pos+8,r,g,b);
+		canvas->SetPixel(x_pos-9,y_pos+7,r,g,b);
+		
+		//stem
+		canvas->SetPixel(x_pos-4,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-5,y_pos+2,r,g,b);
+		
+		canvas->SetPixel(x_pos-2,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos+1,r,g,b);
+		
+		canvas->SetPixel(x_pos-1,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos,r,g,b);
+		
+		canvas->SetPixel(x_pos,y_pos,r,g,b);
+		canvas->SetPixel(x_pos-2,y_pos-1,r,g,b);
+		
+		canvas->SetPixel(x_pos+1,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-2,r,g,b);
+		
+		canvas->SetPixel(x_pos+2,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos,y_pos-3,r,g,b);
+		
+		canvas->SetPixel(x_pos+3,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos+1,y_pos-4,r,g,b);
+		
+		
+		canvas->SetPixel(x_pos+4,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos+2,y_pos-5,r,g,b);
+		
+		canvas->SetPixel(x_pos+3,y_pos-5,r,g,b);
+		canvas->SetPixel(x_pos+4,y_pos-5,r,g,b);
+		
+		
 	}
 	
 }
