@@ -48,8 +48,51 @@ namespace desk_led{
 		int x_pos = (x_l + (x_u-x_l)/2);
 		int y_pos = (y_l + (y_u-y_l)/2);
 		
-		for (int x = x_pos - 10,x<x_pos+11,x++){
+		//panel
+		for (int x = x_pos - 10;x<x_pos+11;x++){
 				canvas->SetPixel(x,y_pos-6,r,g,b);
+				canvas->SetPixel(x,y_pos+6,r,g,b);
 		}
+		
+		for (int y = y_pos -5;y < y_pos+6;y++){
+			canvas->SetPixel(x_pos-10,y,r,g,b);
+			canvas->SetPixel(x_pos+10,y,r,g,b);
+		}
+		
+		//sprite
+		canvas->SetPixel(x_pos,y_pos-4,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos+1,y_pos-3,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos+1,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos+1,y_pos-1,r,g,b);
+		
+		canvas->SetPixel(x_pos-2,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos+2,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos+3,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos+4,y_pos-2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos+4,y_pos-1,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos,r,g,b);
+		canvas->SetPixel(x_pos+3,y_pos,r,g,b);
+		
+		canvas->SetPixel(x_pos-2,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos+2,y_pos+1,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos+3,y_pos+2,r,g,b);
+		canvas->SetPixel(x_pos-4,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos+4,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos-3,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos+3,y_pos+4,r,g,b);
+		
+		canvas->SetPixel(x_pos-2,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos+2,y_pos+4,r,g,b);
+		canvas->SetPixel(x_pos-1,y_pos+3,r,g,b);
+		canvas->SetPixel(x_pos+1,y_pos+3,r,g,b);
+		
+		canvas->SetPixel(x_pos,y_pos+2,r,g,b);
 	}
 }

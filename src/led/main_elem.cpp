@@ -5,6 +5,7 @@
 #include "settings_icon.h"
 #include "display_icon.h"
 #include "games_icon.h"
+#include "screensaver_icon.h"
 
 #include <vector>
 
@@ -16,7 +17,7 @@ namespace desk_led{
 		options.push_back(new IconSettings(x_lower,x_upper/2,y_lower,y_lower + (y_upper-y_lower)/2));
 		options.push_back(new IconGames(x_lower,x_upper/2,y_lower + (y_upper-y_lower)/2,y_upper));
 		options.push_back(new IconDisplay(x_upper/2,x_upper,y_lower,y_lower + (y_upper-y_lower)/2));
-		//options.push_back(new IconSettings(x_upper/2,x_upper,y_lower + (y_upper-y_lower)/2,y_upper));
+		options.push_back(new IconSS(x_upper/2,x_upper,y_lower + (y_upper-y_lower)/2,y_upper));
 	}
 	
 	void MainElement::drawOptions(rgb_matrix::FrameCanvas* canvas) const{
