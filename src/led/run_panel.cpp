@@ -33,19 +33,20 @@ int main(){
 	
 	//arbitrary values for x,y boudns
 	StatusElement test(0,63,0,10);
-	test.drawBorders(canvas);
-	test.scrollText(canvas);
-	
-	TimeElement test_time(0,63,53,63);
-	test_time.drawBorders(canvas);
-	test_time.drawTime(canvas);
+	//test.drawBorders(canvas);
+	//test.scrollText(canvas);
 	
 	MainElement test_main(0,63,10,53);
-	test_main.drawBorders(canvas);
-	test_main.drawOptions(canvas);
+	//test_main.drawBorders(canvas);
+	//test_main.drawOptions(canvas);
+	
+	TimeElement test_time(0,63,53,63);
+	//test_time.drawBorders(canvas);
+	//test_time.drawTime(canvas);
+	
 	
 	//canvas->SetPixel(5,5,255,0,0);
-	canvas = matrix -> SwapOnVSync(canvas);
+	//canvas = matrix -> SwapOnVSync(canvas);
 	
 	
 	// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION (2nd is integrated, not as efficient, change later)
@@ -56,29 +57,23 @@ int main(){
 		
 		usleep(50000);
 		counter++;
-		test_time.drawTime(canvas);
-		test.scrollText(canvas);
 		test.drawBorders(canvas);
+		test.scrollText(canvas);
+		
 		test_time.drawBorders(canvas);
+		test_time.drawTime(canvas);
+		
 		test_main.drawBorders(canvas);
 		test_main.drawOptions(canvas);
+		
 		canvas = matrix -> SwapOnVSync(canvas);
 		
-		if (counter == 200){
-			//std::string nm= "Testing changing text";
-			//rgb_matrix::Color newC= rgb_matrix::Color(255,0,0); 
-			//test.setMessage(nm);
-			//test.setMessageColour(newC);
-			//test_time.setTimeColour(newC);
-			test_time.showDate(false);
-		}
-		if (counter == 400){
-			test_time.showTime(false);
-		}
-		if (counter == 600){
+
+		if (counter == 1000){
 			test_time.showDate(true);
 			std::cout << "Deleted option\n";
 			test_main.deleteOptions();
+			break;
 		}
 	}
 	

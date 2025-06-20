@@ -23,11 +23,14 @@ namespace desk_led{
 		//currently using this to free memory, CONSIDER smart pointers
 		void deleteOptions();
 		
+		void changeSelected();
+		
 		
 		private:
 
 		std::vector<IconElement*> options;
 		IconElement* selected = nullptr;
+		int indexSelected = 0;
 		
 	};
 	
