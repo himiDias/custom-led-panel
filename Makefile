@@ -14,7 +14,9 @@ LDFLAGS = -L$(LIB_DIR)/rpi-rgb-led-matrix/lib
 LDLIBS = -lrgbmatrix -lrt -lm -lpthread
 
 #---Include---
-INC_PATHS = -I$(INCLUDE_DIR) -I$(LIB_DIR)/rpi-rgb-led-matrix/include
+INC_PATHS = -I$(INCLUDE_DIR) \
+-I$(LIB_DIR)/rpi-rgb-led-matrix/include \
+-I$(LIB_DIR)/Crow/include
 
 #--Source---
 SOURCES = $(SRC_DIR)/led/run_panel.cpp \
