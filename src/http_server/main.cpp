@@ -5,7 +5,8 @@ int main()
 	crow::SimpleApp app;
 	
 	CROW_ROUTE(app,"/")([](){
-		return "Hello World";
+		auto page = crow::mustache::load_text("/src/http_server/controller.html");
+		return page;
 	});
 	
 	app.port(18080).multithreaded().run();
