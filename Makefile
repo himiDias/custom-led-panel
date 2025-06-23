@@ -19,7 +19,7 @@ INC_PATHS = -I$(INCLUDE_DIR) \
 -I$(LIB_DIR)/Crow/include
 
 #--Source---
-SOURCES = $(SRC_DIR)/led/run_panel.cpp \
+LED_SOURCES = $(SRC_DIR)/led/run_panel.cpp \
 $(SRC_DIR)/led/panel_element.cpp \
 $(SRC_DIR)/led/status_elem.cpp \
 $(SRC_DIR)/led/time_elem.cpp \
@@ -30,31 +30,52 @@ $(SRC_DIR)/led/display_icon.cpp \
 $(SRC_DIR)/led/games_icon.cpp \
 $(SRC_DIR)/led/screensaver_icon.cpp \
 
-OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
+LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 
 #---Executable---
-TARGET = $(BIN_DIR)/run_panel
+LED_TARGET = $(BIN_DIR)/run_panel
+
+#---CROW SERVER---
+CROW_SRC = $(SRC_DIR)/http_server/main.cpp
+CROW_OBJ = $(BUILD_DIR)/http_server/main.o
+CROW_TARGET = $(BIN_DIR)/http_server
 
 .PHONY: all clean run setup
 
+all: $(LED_TARGET) $(CROW_TARGET)
 
-$(TARGET): $(OBJECTS)
+$(LED_TARGET): $(LED_OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
-	@echo "Build successful: $(TARGET)"
+	$(CXX) $(LED_OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
+	@echo "Build successful: $(LED_TARGET)"
+
+$(CROW_TARGET): $(CROW_OBJ)
+	@mkdir -p $(@D)
+	$(CXX) $(CROW_OBJ) $(CXXFLAGS) $(INC_PATHS) -o $@
+	@echo "Build successul: $(CROW_TARGET)"
+
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INC_PATHS) -c $< -o $@
 	@echo "Compiled: $<"
 
+$(BUILD_DIR)/http_server/%.o: $(SRC_DIR)/http_server/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INC_PATHS) -c $< -o $@
+	@echo "Compiled Crow Source: $<"
+
 clean:
 	@echo "Cleaning build artifacts..."
 	$(RM) -r $(BUILD_DIR) $(BIN_DIR)
 
-run: $(TARGET)
-	@echo "Running $(TARGET)... (requires sudo)"
-	sudo $(TARGET)
+run: $(LED_TARGET)
+	@echo "Running $(LED_TARGET)... (requires sudo)"
+	sudo $(LED_TARGET)
+
+run_crow: $(CROW_TARGET)
+	@echo "Running $(CROW_TARGET)..."
+	./$(LED_TARGET)
 
 setup:
 	@echo "Creating necessary directories..."
