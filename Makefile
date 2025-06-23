@@ -16,7 +16,8 @@ LDLIBS = -lrgbmatrix -lrt -lm -lpthread
 #---Include---
 INC_PATHS = -I$(INCLUDE_DIR) \
 -I$(LIB_DIR)/rpi-rgb-led-matrix/include \
--I$(LIB_DIR)/Crow/include
+-I$(LIB_DIR)/Crow/include \
+-I$(LIB_DIR)/asio/asio/include
 
 #--Source---
 LED_SOURCES = $(SRC_DIR)/led/run_panel.cpp \
@@ -75,7 +76,7 @@ run: $(LED_TARGET)
 
 run_crow: $(CROW_TARGET)
 	@echo "Running $(CROW_TARGET)..."
-	./$(LED_TARGET)
+	./$(CROW_TARGET)
 
 setup:
 	@echo "Creating necessary directories..."
