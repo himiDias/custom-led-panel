@@ -17,5 +17,16 @@ int main()
 		return page;
 	});
 	
+	CROW_ROUTE(app,"/button-pressed")([](const crow::request& req){
+		auto query_params = crow::query_string(req.raw_url);
+		//std::cout << "Request raw url: "<< req.raw_url<<std::endl;
+		// gets id if id exists
+		std::string id = query_params.get("id") ? query_params.get("id") : "NONE";
+		
+		std::cout << "Button pressed : " << id << std::endl;
+		
+		return crow::response(200,"Button " + id + "received");
+	});	
+	
 	app.port(18080).multithreaded().run();
 }
