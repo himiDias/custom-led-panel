@@ -4,4 +4,4 @@
 # Ignore executable
 run_panel
 
-http_server
+bin/http_server
