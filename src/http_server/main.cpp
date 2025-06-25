@@ -8,13 +8,25 @@ int main()
 	crow::SimpleApp app;
 	
 	std::cout << "Current workignn dir: " << std::filesystem::current_path() << std::endl;
-	//crow::mustache::set_base("src/http_server");
+	crow::mustache::set_global_base("src/http_server/templates");
  
 	
 	CROW_ROUTE(app,"/")([](){
-		crow::mustache::set_base("src/http_server/templates");
-		auto page = crow::mustache::load_text("controller.html");
-		return page;
+		auto page = crow::mustache::load("controller.html");
+		return page.render();
+	});
+	
+	CROW_ROUTE(app,"/static/<string>")([](const std::string& filename){
+		std::ifstream in ("src/http_server/static/"+filename,std::ifstream::in);
+		
+		if (!in) return crow::response(404,".css not found");
+		
+		std::ostringstream contents;
+		contents << in.rdbuf();
+		in.close();
+		crow::response res(contents.str());
+		res.set_header("Content-type","text/css");
+		return res;
 	});
 	
 	CROW_ROUTE(app,"/button-pressed")([](const crow::request& req){
