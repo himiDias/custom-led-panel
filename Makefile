@@ -34,27 +34,25 @@ $(SRC_DIR)/led/screensaver_icon.cpp \
 
 LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 
-#---Executable---
-LED_TARGET = $(BIN_DIR)/run_panel
+
 
 #---CROW SERVER---
 CROW_SRC = $(SRC_DIR)/http_server/server.cpp
 CROW_OBJ = $(BUILD_DIR)/http_server/server.o
-CROW_TARGET = $(BIN_DIR)/run_server
+
+
+#--EXECUTABLE---
+TARGET = $(BIN_DIR)/run_desk_panel
+OBJECTS = $(LED_OBJECTS) $(CROW_OBJ)
 
 .PHONY: all clean run setup
 
-all: $(LED_TARGET) $(CROW_TARGET)
+all: $(TARGET)
 
-$(LED_TARGET): $(LED_OBJECTS)
+$(TARGET): $(OBJECTS) $(SRC_DIR)/main.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(LED_OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
-	@echo "Build successful: $(LED_TARGET)"
-
-$(CROW_TARGET): $(CROW_OBJ)
-	@mkdir -p $(@D)
-	$(CXX) $(CROW_OBJ) $(CXXFLAGS) $(INC_PATHS) -o $@
-	@echo "Build successul: $(CROW_TARGET)"
+	@(CXX) $(SRC_DIR)/main.cpp $(ALL_OBJECTS) $(CXXFLAGS) $(INC_PATHS) $(LDFLAGS) $(LDLIBS) -o $@
+	@echo "Build successful: $(TARGET)"
 
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -71,13 +69,9 @@ clean:
 	@echo "Cleaning build artifacts..."
 	$(RM) -r $(BUILD_DIR) $(BIN_DIR)
 
-run_led_panel: $(LED_TARGET)
-	@echo "Running $(LED_TARGET)... (requires sudo)"
-	sudo $(LED_TARGET)
-
-run_crow_server: $(CROW_TARGET)
-	@echo "Running $(CROW_TARGET)..."
-	./$(CROW_TARGET)
+run: $(TARGET)
+	@echo "Running $(TARGET)...(requires sudo)"
+	sudo $(TARGET)
 
 setup:
 	@echo "Creating necessary directories..."
