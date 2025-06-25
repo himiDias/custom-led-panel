@@ -3,3 +3,5 @@
 
 # Ignore executable
 run_panel
+
+bin/http_server

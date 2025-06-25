@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+		<title>LED Controller</title>
+		<link rel="stylesheet" href="../static/styles.css">
+	</head>
+	<body>
+		<div id = "container">
+			<div id = "dpad">
+				<button id = "dpad-u" onclick="onButtonPress('dpad-u')">^
+				</button>
+				<button id = "dpad-d" onclick="onButtonPress('dpad-d')">v
+				</button>
+				<button id = "dpad-l" onclick="onButtonPress('dpad-l')"><
+				</button>
+				<button id = "dpad-r" onclick="onButtonPress('dpad-r')">>
+				</button>
+			</div>
+			
+			<div id = "buttons">
+				<button id = "button-a" onclick="onButtonPress('button-a')">A
+				</button>
+				<button id = "button-b" onclick="onButtonPress('button-b')">B
+				</button>
+				<button id = "button-x" onclick="onButtonPress('button-x')">X
+				</button>
+				<button id = "button-y" onclick="onButtonPress('button-y')">Y
+				</button>
+			</div>
+		</div>
+		
+		<script>
+			function onButtonPress(buttonId){
+				fetch(`/button-pressed?id=${buttonId}`,{
+					method: 'GET',
+				})
+				.then(response => response.text())
+				.then(data => console.log("Response from server:",data))
+				.catch(error => console.error("Error:",error));
+				
+			}
+		</script>
+	</body>
+
+</html>
