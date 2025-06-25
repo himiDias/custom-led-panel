@@ -37,8 +37,8 @@ LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 LED_TARGET = $(BIN_DIR)/run_panel
 
 #---CROW SERVER---
-CROW_SRC = $(SRC_DIR)/http_server/main.cpp
-CROW_OBJ = $(BUILD_DIR)/http_server/main.o
+CROW_SRC = $(SRC_DIR)/http_server/server.cpp
+CROW_OBJ = $(BUILD_DIR)/http_server/server.o
 CROW_TARGET = $(BIN_DIR)/http_server
 
 .PHONY: all clean run setup
