@@ -14,13 +14,14 @@ LDFLAGS = -L$(LIB_DIR)/rpi-rgb-led-matrix/lib
 LDLIBS = -lrgbmatrix -lrt -lm -lpthread
 
 #---Include---
-INC_PATHS = -I$(INCLUDE_DIR) \
+INC_PATHS = -I$(INCLUDE_DIR)/led \
+-I$(INCLUDE_DIR)/server \
 -I$(LIB_DIR)/rpi-rgb-led-matrix/include \
 -I$(LIB_DIR)/Crow/include \
 -I$(LIB_DIR)/asio/asio/include
 
 #--Source---
-LED_SOURCES = $(SRC_DIR)/led/run_panel.cpp \
+LED_SOURCES = $(SRC_DIR)/led/panel.cpp \
 $(SRC_DIR)/led/panel_element.cpp \
 $(SRC_DIR)/led/status_elem.cpp \
 $(SRC_DIR)/led/time_elem.cpp \
@@ -39,7 +40,7 @@ LED_TARGET = $(BIN_DIR)/run_panel
 #---CROW SERVER---
 CROW_SRC = $(SRC_DIR)/http_server/server.cpp
 CROW_OBJ = $(BUILD_DIR)/http_server/server.o
-CROW_TARGET = $(BIN_DIR)/http_server
+CROW_TARGET = $(BIN_DIR)/run_server
 
 .PHONY: all clean run setup
 
@@ -70,11 +71,11 @@ clean:
 	@echo "Cleaning build artifacts..."
 	$(RM) -r $(BUILD_DIR) $(BIN_DIR)
 
-run: $(LED_TARGET)
+run_led_panel: $(LED_TARGET)
 	@echo "Running $(LED_TARGET)... (requires sudo)"
 	sudo $(LED_TARGET)
 
-run_crow: $(CROW_TARGET)
+run_crow_server: $(CROW_TARGET)
 	@echo "Running $(CROW_TARGET)..."
 	./$(CROW_TARGET)
 
