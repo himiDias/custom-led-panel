@@ -41,7 +41,7 @@ CROW_SRC = $(SRC_DIR)/http_server/server.cpp
 CROW_OBJ = $(BUILD_DIR)/http_server/server.o
 
 #---MAIN---
-MAIN_SRC = 4(SRC_DIR)/main.cpp
+MAIN_SRC = $(SRC_DIR)/main.cpp
 MAIN_OBJ = $(BUILD_DIR)/main.o
 
 #--EXECUTABLE---
@@ -54,7 +54,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS) 
 	@mkdir -p $(@D)
-	@(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
+	$(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
 	@echo "Build successful: $(TARGET)"
 
 
