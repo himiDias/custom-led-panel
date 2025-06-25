@@ -40,18 +40,21 @@ LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 CROW_SRC = $(SRC_DIR)/http_server/server.cpp
 CROW_OBJ = $(BUILD_DIR)/http_server/server.o
 
+#---MAIN---
+MAIN_SRC = 4(SRC_DIR)/main.cpp
+MAIN_OBJ = $(BUILD_DIR)/main.o
 
 #--EXECUTABLE---
 TARGET = $(BIN_DIR)/run_desk_panel
-OBJECTS = $(LED_OBJECTS) $(CROW_OBJ)
+OBJECTS = $(MAIN_OBJ) $(LED_OBJECTS) $(CROW_OBJ)
 
 .PHONY: all clean run setup
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS) $(SRC_DIR)/main.cpp
+$(TARGET): $(OBJECTS) 
 	@mkdir -p $(@D)
-	@(CXX) $(SRC_DIR)/main.cpp $(ALL_OBJECTS) $(CXXFLAGS) $(INC_PATHS) $(LDFLAGS) $(LDLIBS) -o $@
+	@(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
 	@echo "Build successful: $(TARGET)"
 
 
