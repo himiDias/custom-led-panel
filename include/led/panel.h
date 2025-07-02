@@ -4,7 +4,8 @@
 namespace desk_led{
 	class Panel{
 		public:
-		int run_panel();
+		
+		static int run_panel();
 	};
 	
 }

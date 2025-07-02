@@ -6,7 +6,7 @@ namespace desk_led{
 	class Server{
 		public:
 		
-		void run_server();
+		static void run_server();
 		
 	};
 
