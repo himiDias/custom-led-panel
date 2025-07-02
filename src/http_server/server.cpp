@@ -1,13 +1,14 @@
 #include "crow.h"
 
 #include "server.h"
+#include "thread_safe_queue.h"
 
 #include <iostream>
 #include <string>
 
 namespace desk_led{
 	
-	void Server::run_server()
+	void Server::run_server(ThreadSafeQ<std::string>& shared_queue)
 	{
 		crow::SimpleApp app;
 		
@@ -33,13 +34,14 @@ namespace desk_led{
 			return res;
 		});
 		
-		CROW_ROUTE(app,"/button-pressed")([](const crow::request& req){
+		CROW_ROUTE(app,"/button-pressed")([&shared_queue](const crow::request& req){
 			auto query_params = crow::query_string(req.raw_url);
 			//std::cout << "Request raw url: "<< req.raw_url<<std::endl;
 			// gets id if id exists
 			std::string id = query_params.get("id") ? query_params.get("id") : "NONE";
 			
 			std::cout << "Button pressed : " << id << std::endl;
+			shared_queue.push(id);
 			
 			return crow::response(200,"Button " + id + "received");
 		});	

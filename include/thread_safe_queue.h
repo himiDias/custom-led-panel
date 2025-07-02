@@ -1,3 +1,6 @@
+#ifndef THREADSAFEQ_H
+#define THREADSAFEQ_H
+
 #include <condition_variable>
 #include <iostream>
 #include <mutex>
@@ -24,11 +27,11 @@ class ThreadSafeQ {
 		m_cond.notify_one();
 	}
 	
-	void pop()
+	T pop()
 	{
 		std::unique_lock<std::mutex> lock(m_mutex);
 		
-		m_cond.wait(lock,[this]() {return !m_queue.empty();});
+		m_cond.wait(lock,[this]() {return !m_queue.empty(); });
 		
 		T item = m_queue.front();
 		m_queue.pop();
@@ -36,4 +39,6 @@ class ThreadSafeQ {
 		return item;
 	}
 	
-}
+};
+
+#endif
