@@ -5,6 +5,7 @@
 #include <iostream>
 #include <mutex>
 #include <queue>
+#include <optional>
 
 template <typename T>
 class ThreadSafeQ {
@@ -23,6 +24,7 @@ class ThreadSafeQ {
 		std::unique_lock<std::mutex> lock(m_mutex);
 		
 		m_queue.push(item);
+		std::cout << "TSQ - " << item << " PUSHED" << std::endl;
 		
 		m_cond.notify_one();
 	}
@@ -35,6 +37,20 @@ class ThreadSafeQ {
 		
 		T item = m_queue.front();
 		m_queue.pop();
+		std::cout << "TSQ - " << item << " POPPED" << std::endl;
+		
+		return item;
+	}
+	
+	//for non-blocking pop, needed for panel
+	std::optional<T> nonBlockPop()
+	{
+		std::unique_lock<std::mutex> lock(m_mutex);
+		if (m_queue.empty()) return std::nullopt;
+		
+		T item = m_queue.front();
+		m_queue.pop();
+		std::cout << "TSQ - " << item << " POPPED" << std::endl;
 		
 		return item;
 	}

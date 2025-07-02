@@ -16,7 +16,7 @@ int main(){
 	std::cout << "Shared queue created" <<std::endl;
 	
 	
-	std::thread led_thread(&Panel::run_panel);
+	std::thread led_thread(&Panel::run_panel, std::ref(command_queue));
 	
 	std::thread server_thread(&Server::run_server, std::ref(command_queue));
 	

@@ -8,15 +8,18 @@
 #include "time_elem.h"
 #include "main_elem.h"
 
+#include "thread_safe_queue.h"
+
 // standard
 #include <unistd.h>
 #include <iostream>
+#include <string>
 
 using namespace rgb_matrix;
 
 namespace desk_led{
 	
-	int Panel::run_panel(){
+	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue){
 		RGBMatrix::Options options;
 		options.rows = 64;
 		options.cols = 64;
@@ -48,11 +51,11 @@ namespace desk_led{
 		// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION (2nd is integrated, not as efficient, change later)
 		
 		
-		int counter = 0;
+		//int counter = 0;
 		while (true){
 			
 			usleep(50000);
-			counter++;
+			//counter++;
 			test.drawBorders(canvas);
 			test.scrollText(canvas);
 			
@@ -64,13 +67,16 @@ namespace desk_led{
 			
 			canvas = matrix -> SwapOnVSync(canvas);
 			
-
+			//remove from qyeye, do stuff here
+			auto usr_inp = shared_queue.nonBlockPop();
+			
+			/*
 			if (counter == 1000){
 				test_time.showDate(true);
 				std::cout << "Deleted option\n";
 				test_main.deleteOptions();
 				break;
-			}
+			}*/
 		}
 		
 		std::cout << "Matrix cleared, Exiting," << std::endl;
