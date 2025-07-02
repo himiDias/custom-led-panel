@@ -15,12 +15,14 @@ LDLIBS = -lrgbmatrix -lrt -lm -lpthread
 
 #---Include---
 INC_PATHS = -I$(INCLUDE_DIR) \
+-I$(INCLUDE_DIR)/led \
+-I$(INCLUDE_DIR)/server \
 -I$(LIB_DIR)/rpi-rgb-led-matrix/include \
 -I$(LIB_DIR)/Crow/include \
 -I$(LIB_DIR)/asio/asio/include
 
 #--Source---
-LED_SOURCES = $(SRC_DIR)/led/run_panel.cpp \
+LED_SOURCES = $(SRC_DIR)/led/panel.cpp \
 $(SRC_DIR)/led/panel_element.cpp \
 $(SRC_DIR)/led/status_elem.cpp \
 $(SRC_DIR)/led/time_elem.cpp \
@@ -33,27 +35,28 @@ $(SRC_DIR)/led/screensaver_icon.cpp \
 
 LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 
-#---Executable---
-LED_TARGET = $(BIN_DIR)/run_panel
+
 
 #---CROW SERVER---
-CROW_SRC = $(SRC_DIR)/http_server/main.cpp
-CROW_OBJ = $(BUILD_DIR)/http_server/main.o
-CROW_TARGET = $(BIN_DIR)/http_server
+CROW_SRC = $(SRC_DIR)/http_server/server.cpp
+CROW_OBJ = $(BUILD_DIR)/http_server/server.o
+
+#---MAIN---
+MAIN_SRC = $(SRC_DIR)/main.cpp
+MAIN_OBJ = $(BUILD_DIR)/main.o
+
+#--EXECUTABLE---
+TARGET = $(BIN_DIR)/run_desk_panel
+OBJECTS = $(MAIN_OBJ) $(LED_OBJECTS) $(CROW_OBJ)
 
 .PHONY: all clean run setup
 
-all: $(LED_TARGET) $(CROW_TARGET)
+all: $(TARGET)
 
-$(LED_TARGET): $(LED_OBJECTS)
+$(TARGET): $(OBJECTS) 
 	@mkdir -p $(@D)
-	$(CXX) $(LED_OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
-	@echo "Build successful: $(LED_TARGET)"
-
-$(CROW_TARGET): $(CROW_OBJ)
-	@mkdir -p $(@D)
-	$(CXX) $(CROW_OBJ) $(CXXFLAGS) $(INC_PATHS) -o $@
-	@echo "Build successul: $(CROW_TARGET)"
+	$(CXX) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
+	@echo "Build successful: $(TARGET)"
 
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -70,13 +73,9 @@ clean:
 	@echo "Cleaning build artifacts..."
 	$(RM) -r $(BUILD_DIR) $(BIN_DIR)
 
-run: $(LED_TARGET)
-	@echo "Running $(LED_TARGET)... (requires sudo)"
-	sudo $(LED_TARGET)
-
-run_crow: $(CROW_TARGET)
-	@echo "Running $(CROW_TARGET)..."
-	./$(CROW_TARGET)
+run: $(TARGET)
+	@echo "Running $(TARGET)...(requires sudo)"
+	sudo $(TARGET)
 
 setup:
 	@echo "Creating necessary directories..."
