@@ -34,9 +34,19 @@ namespace desk_led{
 		}
 	}
 	
-	void MainElement::changeSelected(){
+	void MainElement::changeSelected(char inp){
 		//some event is passed in, current none 
-		
+		switch (inp){
+			case 'r':
+				indexSelected++;
+				break;
+			case 'l':
+				indexSelected--;
+				break;
+			default:
+				break;
+		}
+			
 		//check event, change indexSelected
 		//i.e is left arrow pressed, do -1, right +1, up etc
 		

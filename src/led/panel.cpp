@@ -19,6 +19,10 @@ using namespace rgb_matrix;
 
 namespace desk_led{
 	
+StatusElement Panel::status_e(0,63,0,10);
+MainElement Panel::main_e(0,63,10,53);
+TimeElement Panel::time_e(0,63,53,63);
+
 	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue){
 		RGBMatrix::Options options;
 		options.rows = 64;
@@ -36,15 +40,16 @@ namespace desk_led{
 		
 		FrameCanvas *canvas = matrix->CreateFrameCanvas();
 		
-		//arbitrary values for x,y boudns
-		StatusElement test(0,63,0,10);
+		
+		/*
+		StatusElement status_e(0,63,0,10);
 		 
 		
-		MainElement test_main(0,63,10,53);
+		MainElement main_e(0,63,10,53);
 		 
 		
-		TimeElement test_time(0,63,53,63);
-		 
+		TimeElement time_e(0,63,53,63);*/
+	
 		//canvas = matrix -> SwapOnVSync(canvas);
 		
 		
@@ -56,27 +61,24 @@ namespace desk_led{
 			
 			usleep(50000);
 			//counter++;
-			test.drawBorders(canvas);
-			test.scrollText(canvas);
+			status_e.drawBorders(canvas);
+			status_e.scrollText(canvas);
 			
-			test_time.drawBorders(canvas);
-			test_time.drawTime(canvas);
+			time_e.drawBorders(canvas);
+			time_e.drawTime(canvas);
 			
-			test_main.drawBorders(canvas);
-			test_main.drawOptions(canvas);
+			main_e.drawBorders(canvas);
+			main_e.drawOptions(canvas);
 			
 			canvas = matrix -> SwapOnVSync(canvas);
 			
 			//remove from qyeye, do stuff here
 			auto usr_inp = shared_queue.nonBlockPop();
-			
-			/*
-			if (counter == 1000){
-				test_time.showDate(true);
-				std::cout << "Deleted option\n";
-				test_main.deleteOptions();
-				break;
-			}*/
+			if (usr_inp){
+				std::string usr_inp_str;
+				usr_inp_str = usr_inp.value();
+				process_input(usr_inp_str);
+			}
 		}
 		
 		std::cout << "Matrix cleared, Exiting," << std::endl;
@@ -85,5 +87,12 @@ namespace desk_led{
 		sleep(50);
 		delete matrix;
 		return 0;
+	}
+	
+	void Panel::process_input(std::string input){
+		if(input.substr(0,4) == "dpad") {
+			//char* comm = (input.substr(5,6)).c_str()
+			main_e.changeSelected(input[5]);
+		}
 	}
 }
