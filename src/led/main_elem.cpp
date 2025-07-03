@@ -39,9 +39,11 @@ namespace desk_led{
 		switch (inp){
 			case 'r':
 				indexSelected++;
+				if (indexSelected == (int)options.size()) indexSelected = 0;
 				break;
 			case 'l':
 				indexSelected--;
+				if (indexSelected < 0) indexSelected = options.size()-1;
 				break;
 			default:
 				break;
