@@ -36,6 +36,7 @@ namespace desk_led{
 	
 	void MainElement::changeSelected(char inp){
 		//some event is passed in, current none 
+		selected->setDeselected();
 		switch (inp){
 			case 'r':
 				indexSelected++;
@@ -44,6 +45,14 @@ namespace desk_led{
 			case 'l':
 				indexSelected--;
 				if (indexSelected < 0) indexSelected = options.size()-1;
+				break;
+			case 'u':
+				indexSelected += 2;
+				if (indexSelected >= (int)options.size()) indexSelected = 0 + (indexSelected - options.size());
+				break;
+			case 'd':
+				indexSelected -= 2;
+				if (indexSelected < 0) indexSelected = options.size() + indexSelected;
 				break;
 			default:
 				break;
