@@ -15,12 +15,19 @@ namespace desk_led{
 		std::cout << "Current workignn dir: " << std::filesystem::current_path() << std::endl;
 		crow::mustache::set_global_base("src/http_server/templates");
 	 
-		
+		// User end pages
 		CROW_ROUTE(app,"/")([](){
 			auto page = crow::mustache::load("controller.html");
 			return page.render();
 		});
 		
+		CROW_ROUTE(app,"/settings")([](){
+			auto page = crow::mustache::load("settings.html");
+			return page.render();
+		});
+		
+		
+		// Intermediate pages
 		CROW_ROUTE(app,"/static/<string>")([](const std::string& filename){
 			std::ifstream in ("src/http_server/static/"+filename,std::ifstream::in);
 			
