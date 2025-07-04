@@ -40,11 +40,13 @@ namespace desk_led{
 		switch (inp){
 			case 'r':
 				indexSelected++;
-				if (indexSelected == (int)options.size()) indexSelected = 0;
+				if (indexSelected == (int)options.size()/2) indexSelected = 0;
+				if (indexSelected == (int)options.size()) indexSelected = options.size()/2;
 				break;
 			case 'l':
 				indexSelected--;
-				if (indexSelected < 0) indexSelected = options.size()-1;
+				if (indexSelected == (int)options.size()/2 - 1) indexSelected = options.size() - 1;
+				if (indexSelected < 0) indexSelected = options.size()/2 -1;
 				break;
 			case 'u':
 				indexSelected += 2;
