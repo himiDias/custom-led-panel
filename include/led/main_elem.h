@@ -23,7 +23,7 @@ namespace desk_led{
 		//currently using this to free memory, CONSIDER smart pointers
 		void deleteOptions();
 		
-		void changeSelected();
+		void changeSelected(char inp);
 		
 		
 		private:
