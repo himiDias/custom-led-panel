@@ -16,10 +16,12 @@ namespace desk_led{
 		crow::mustache::set_global_base("src/http_server/templates");
 	 
 		// User end pages
+		
 		CROW_ROUTE(app,"/")([](){
 			auto page = crow::mustache::load("controller.html");
 			return page.render();
 		});
+			
 		
 		CROW_ROUTE(app,"/settings")([](){
 			auto page = crow::mustache::load("settings.html");
