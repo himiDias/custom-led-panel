@@ -9,20 +9,22 @@ function App() {
 
   return (
     <>
-      <h1>LED Controller</h1>
-      
-      <div id = "dpad">
-        <ControllerButton id = "dpad-u" text = "Up" />
-        <ControllerButton id = "dpad-d" text = "Down" />
-        <ControllerButton id = "dpad-l" text = "Left" />
-        <ControllerButton id = "dpad-r" text = "Right" />
-      </div>
-      
-      <div id = "buttons">
-        <ControllerButton id = "btn-a" text = "A" />
-        <ControllerButton id = "btn-b" text = "B" />
-        <ControllerButton id = "btn-x" text = "X" />
-        <ControllerButton id = "btn-y" text = "Y" />
+      <h1 class = "screen-title">LED Controller</h1>
+      <button onClick={enterLandscape}>Fullscreen</button>
+      <div id = "container">
+        <div id = "dpad">
+          <ControllerButton id = "dpad-u" text = "Up" />
+          <ControllerButton id = "dpad-d" text = "Down" />
+          <ControllerButton id = "dpad-l" text = "Left" />
+          <ControllerButton id = "dpad-r" text = "Right" />
+        </div>
+        
+        <div id = "buttons">
+          <ControllerButton id = "btn-a" text = "A" />
+          <ControllerButton id = "btn-b" text = "B" />
+          <ControllerButton id = "btn-x" text = "X" />
+          <ControllerButton id = "btn-y" text = "Y" />
+        </div>
       </div>
     </>
   )
@@ -36,6 +38,20 @@ function ControllerButton({id,text}){
   function handleClick(id){
     console.log("Button : ",id," clicked");
   }
+}
+
+async function enterLandscape(){
+  try{
+    await document.documentElement.requestFullscreen();
+    
+    if (screen.orientation && screen.orientation.lock){
+      await screen.orientation.lock("landscape");
+    }
+    
+    console.log("Orientation locked to landscape");
+    }catch(err){
+      console.error("Orientation failed: ",err);
+    }
 }
 
 export default App
