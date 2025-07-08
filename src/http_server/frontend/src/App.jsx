@@ -9,14 +9,17 @@ function App() {
 
   return (
     <>
-      <h1 class = "screen-title">LED Controller</h1>
-      <button onClick={enterLandscape}>Fullscreen</button>
       <div id = "container">
         <div id = "dpad">
           <ControllerButton id = "dpad-u" text = "Up" />
           <ControllerButton id = "dpad-d" text = "Down" />
           <ControllerButton id = "dpad-l" text = "Left" />
           <ControllerButton id = "dpad-r" text = "Right" />
+        </div>
+        
+        <div id = "header">
+          <h1 class = "screen-title">LED Controller</h1>
+          <button id = "btn-fs" onClick={enterLandscape}>Fullscreen</button>
         </div>
         
         <div id = "buttons">

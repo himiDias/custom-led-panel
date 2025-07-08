@@ -1,16 +1,25 @@
 #root {
-  padding: 2rem;
+  
 }
 
 #container{
 	display: flex;
 	justify-content: space-between;
-	margin : 15px;
+
 }
 
 .screen-title{
-  margin: auto;
+  font-size : 15px;
+}
+
+#btn-fs{
+  font-size : 15px;
+  height : fit-content;
+}
+
+#header{
   text-align:center;
+  margin: 0 auto;
 }
 
 button{
@@ -18,16 +27,25 @@ button{
 	color:white;
 	border: 3px solid black;
 	border-radius: 3px;
+  height:5rem;
+  width:5rem;
+  min-width:fit-content;
 }
 
 #dpad,#buttons{
 	display: grid;
 	grid-template-columns:repeat(3,1fr);
 	grid-template-rows:repeat(3,1fr);
-	gap:10px;
-	width : 40vw;
-	height : 100vh;
+	width : 30vw;
+	height : 75vh;
+}
+
+#dpad{
   padding : 5vw;
+}
+
+#buttons{
+  padding : 5vw ;
 }
 
 #dpad-u, #btn-y{
