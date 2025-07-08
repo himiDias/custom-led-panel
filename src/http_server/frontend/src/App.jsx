@@ -10,6 +10,8 @@ function App() {
   
   useEffect(() => {
     // using test server, change before build
+    // For testing, use new WebSocket("ws://<localhost>:8080");
+    // edit line below, does not work as socket address not written
     const socket = new WebSocket();
     socketRef.current = socket;
     
