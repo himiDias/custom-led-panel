@@ -1,11 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  //const socketRef = useRef(null);
+  const [ws,setWs] = useState(null);
+  
+  useEffect(() => {
+    // using test server, change before build
+    const socket = new Websocket("ws://localhost:8080");
+    setWs(socket);
+    
+    socket.onopen = () => {
+      console.log("Websocket : connection opened");
+    };
+    
+    socket.onmessage = (event) => {
+      console.log("Websocket : received from server : ",event.data);
+    };
+    
+    socket.onclose = () =>{
+      console.log("Websocket : connection closed closed");
+    };
+    
+    return () => {
+      socket.close();
+    };
+    
+    
+  },[]);
 
   return (
     <>
@@ -40,6 +66,8 @@ function ControllerButton({id,text}){
   
   function handleClick(id){
     console.log("Button : ",id," clicked");
+    const message = JSON.stringify({id});
+    socketRed.current.send(message);
   }
 }
 

@@ -28,6 +28,8 @@ namespace desk_led{
 			return page.render();
 		});
 		
+		CROW_WEBSOCKET_ROUTE(app,"/ws")
+		
 		
 		// Intermediate pages
 		CROW_ROUTE(app,"/static/<string>")([](const std::string& filename){
