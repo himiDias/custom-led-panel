@@ -6,13 +6,12 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0);
-  //const socketRef = useRef(null);
-  const [ws,setWs] = useState(null);
+  const socketRef = useRef(null);
   
   useEffect(() => {
     // using test server, change before build
-    const socket = new Websocket("ws://localhost:8080");
-    setWs(socket);
+    const socket = new WebSocket();
+    socketRef.current = socket;
     
     socket.onopen = () => {
       console.log("Websocket : connection opened");
@@ -37,29 +36,29 @@ function App() {
     <>
       <div id = "container">
         <div id = "dpad">
-          <ControllerButton id = "dpad-u" text = "Up" />
-          <ControllerButton id = "dpad-d" text = "Down" />
-          <ControllerButton id = "dpad-l" text = "Left" />
-          <ControllerButton id = "dpad-r" text = "Right" />
+          <ControllerButton id = "dpad-u" text = "Up" socket = {socketRef}/>
+          <ControllerButton id = "dpad-d" text = "Down" socket = {socketRef}/>
+          <ControllerButton id = "dpad-l" text = "Left" socket = {socketRef}/>
+          <ControllerButton id = "dpad-r" text = "Right" socket = {socketRef}/>
         </div>
         
         <div id = "header">
-          <h1 class = "screen-title">LED Controller</h1>
+          <h1 className = "screen-title">LED Controller</h1>
           <button id = "btn-fs" onClick={enterLandscape}>Fullscreen</button>
         </div>
         
         <div id = "buttons">
-          <ControllerButton id = "btn-a" text = "A" />
-          <ControllerButton id = "btn-b" text = "B" />
-          <ControllerButton id = "btn-x" text = "X" />
-          <ControllerButton id = "btn-y" text = "Y" />
+          <ControllerButton id = "btn-a" text = "A" socket = {socketRef}/>
+          <ControllerButton id = "btn-b" text = "B" socket = {socketRef}/>
+          <ControllerButton id = "btn-x" text = "X" socket = {socketRef}/>
+          <ControllerButton id = "btn-y" text = "Y" socket = {socketRef}/>
         </div>
       </div>
     </>
   )
 }
 
-function ControllerButton({id,text}){
+function ControllerButton({id,text,socket}){
   return (
     <button id = {id} onClick={() => handleClick(id)}>{text}</button>
   )
@@ -67,7 +66,7 @@ function ControllerButton({id,text}){
   function handleClick(id){
     console.log("Button : ",id," clicked");
     const message = JSON.stringify({id});
-    socketRed.current.send(message);
+    socket.current.send(message);
   }
 }
 
