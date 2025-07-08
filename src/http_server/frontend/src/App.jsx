@@ -3,33 +3,39 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>LED Controller</h1>
+      
+      <div id = "dpad">
+        <ControllerButton id = "dpad-u" text = "Up" />
+        <ControllerButton id = "dpad-d" text = "Down" />
+        <ControllerButton id = "dpad-l" text = "Left" />
+        <ControllerButton id = "dpad-r" text = "Right" />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      
+      <div id = "buttons">
+        <ControllerButton id = "btn-a" text = "A" />
+        <ControllerButton id = "btn-b" text = "B" />
+        <ControllerButton id = "btn-x" text = "X" />
+        <ControllerButton id = "btn-y" text = "Y" />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
+}
+
+function ControllerButton({id,text}){
+  return (
+    <button id = {id} onClick={() => handleClick(id)}>{text}</button>
+  )
+  
+  function handleClick(id){
+    console.log("Button : ",id," clicked");
+  }
 }
 
 export default App
