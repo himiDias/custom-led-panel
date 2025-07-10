@@ -16,13 +16,13 @@ namespace desk_led{
 		crow::mustache::set_global_base("src/http_server/templates");
 	 
 		// User end pages
-		
+		/*
 		CROW_ROUTE(app,"/")([](){
 			auto page = crow::mustache::load("controller.html");
 			return page.render();
 		});
 			
-		/*
+		
 		CROW_ROUTE(app,"/settings")([](){
 			auto page = crow::mustache::load("settings.html");
 			return page.render();
@@ -39,6 +39,7 @@ namespace desk_led{
 			
 			.onmessage([&](crow::websocket::connection& conn, const std::string& message, bool is_binary){
 				std::cout << "Websocket : CLIENT MESSAGE : " << message << std::endl;
+				shared_queue.push(message);
 			})
 			
 			.onerror([&](crow::websocket::connection& conn, const std::string& error_message){
@@ -47,6 +48,7 @@ namespace desk_led{
 		
 		
 		// Intermediate pages
+		/*COMMENTED FOR TESTING, USING REACT INSTEAD, 
 		CROW_ROUTE(app,"/static/<string>")([](const std::string& filename){
 			std::ifstream in ("src/http_server/static/"+filename,std::ifstream::in);
 			
@@ -71,7 +73,7 @@ namespace desk_led{
 			
 			return crow::response(200,"Button " + id + "received");
 		});	
-		
+		*/
 		app.port(18080).multithreaded().run();
 
 	}

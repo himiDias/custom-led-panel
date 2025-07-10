@@ -12,7 +12,8 @@ function App() {
     // using test server, change before build
     // For testing, use new WebSocket("ws:<localhost>/ws:18080");
     // edit line below, does not work as socket address not written
-    const socket = new WebSocket("ws://192.168.1.76/ws:18080");
+    const hostname = window.location.hostname;
+    const socket = new WebSocket(`ws://${hostname}:18080/ws`);
     socketRef.current = socket;
     
     socket.onopen = () => {
