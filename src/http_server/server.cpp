@@ -22,13 +22,28 @@ namespace desk_led{
 			return page.render();
 		});
 			
-		
+		/*
 		CROW_ROUTE(app,"/settings")([](){
 			auto page = crow::mustache::load("settings.html");
 			return page.render();
-		});
+		});*/
 		
 		CROW_WEBSOCKET_ROUTE(app,"/ws")
+			.onopen([&](crow::websocket::connection& conn){
+				std::cout << "Websocket : CONNECTED" << std::endl;
+			})
+			
+			.onclose([&](crow::websocket::connection& conn, const std::string& reason, uint16_t with_status_code){
+				std::cout << "Websocket : CONNECTION CLOSED : " << reason << std::endl;
+			})
+			
+			.onmessage([&](crow::websocket::connection& conn, const std::string& message, bool is_binary){
+				std::cout << "Websocket : CLIENT MESSAGE : " << message << std::endl;
+			})
+			
+			.onerror([&](crow::websocket::connection& conn, const std::string& error_message){
+				std::cerr << "Websocket : ERROR OCCURRED : " << error_message << std::endl;
+			});
 		
 		
 		// Intermediate pages
