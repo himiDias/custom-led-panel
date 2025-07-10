@@ -90,9 +90,10 @@ TimeElement Panel::time_e(0,63,53,63);
 	}
 	
 	void Panel::process_input(std::string input){
-		int sep = input.find(':') +2;
-		if(input.substr(sep,4) == "dpad") {
-			main_e.changeSelected(input[sep+5]);
+		int sep_key = input.find(':') +2;
+		int sep_val = input.find('-');
+		if(input.substr(sep_key,sep_val-sep_key) == "dpad") {
+			main_e.changeSelected(input[sep_val+1]);
 		}
 	}
 }
