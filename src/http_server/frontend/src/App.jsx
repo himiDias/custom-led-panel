@@ -6,12 +6,12 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState('main');
+  
   const socketRef = useRef(null);
   
+  
   useEffect(() => {
-    // using test server, change before build
-    // For testing, use new WebSocket("ws:<localhost>/ws:18080");
-    // edit line below, does not work as socket address not written
     const hostname = window.location.hostname;
     const socket = new WebSocket(`ws://${hostname}:18080/ws`);
     socketRef.current = socket;
@@ -34,10 +34,30 @@ function App() {
     
     
   },[]);
-
+  
+  const renderPage = () => {
+    switch (currentPage){
+      case 'main':
+        return <MainPage  socketRef = {socketRef}/>;
+      case 'settings':
+        return <SettingsPage />;
+      default:
+        return <ErrorPage/>;
+    }
+  };
+  
   return (
     <>
-      <div id = "container">
+      <div id = "main">
+        {renderPage()}
+      </div>
+    </>
+  )
+}
+
+const MainPage = ({socketRef}) => {
+  return (
+    <div id = "container">
         <div id = "dpad">
           <ControllerButton id = "dpad-u" text = "Up" socket = {socketRef}/>
           <ControllerButton id = "dpad-d" text = "Down" socket = {socketRef}/>
@@ -57,8 +77,8 @@ function App() {
           <ControllerButton id = "btn-y" text = "Y" socket = {socketRef}/>
         </div>
       </div>
-    </>
   )
+
 }
 
 function ControllerButton({id,text,socket}){
@@ -86,5 +106,15 @@ async function enterLandscape(){
       console.error("Orientation failed: ",err);
     }
 }
+
+
+const SettingsPage = () =>{
+  return (
+    <div>
+      <h1> Settings </h1>
+    </div>
+  )
+}
+
 
 export default App
