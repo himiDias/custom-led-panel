@@ -102,7 +102,10 @@ ThreadSafeQ<std::string>* server_commands_queue;
 			main_e.changeSelected(input[sep_val+1]);
 		}
 		else if(input.substr(sep_val+1,1) == "a"){
-			main_e.drawSelected(canvas);
+			std::string cmd = main_e.drawSelected(canvas);
+			if (cmd != ""){
+				server_commands_queue->push(cmd);
+			}
 		}
 	}
 }

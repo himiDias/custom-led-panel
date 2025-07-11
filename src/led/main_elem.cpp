@@ -9,6 +9,8 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
+#include <typeinfo>
 
 namespace desk_led{
 	MainElement::MainElement(int x_lower, int x_upper, int y_lower, int y_upper)
@@ -69,10 +71,15 @@ namespace desk_led{
 		
 	}
 	
-	void MainElement::drawSelected(rgb_matrix::FrameCanvas* canvas) const{
+	std::string MainElement::drawSelected(rgb_matrix::FrameCanvas* canvas) const{
 		// CHANGE DECLARATION
 		// WOULD EITHER, return nullptr or return std::string command, this would be pushed onto the server_cmds_queue
-		std::cout << "DrawSelected called, PLACEHOLDER, Draw selected screen" << std::endl;
+		
+		if (typeid(*selected) == typeid(IconSettings)){
+			return "{'switch_screen':'settings'}";
+		}
+		
+		return "";
 	}
 	
 }
