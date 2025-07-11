@@ -6,7 +6,8 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState('main');
+  // change back to 'main', using diffreent for developing
+  const [currentPage, setCurrentPage] = useState('settings');
   
   const socketRef = useRef(null);
   
@@ -117,7 +118,20 @@ async function enterLandscape(){
 const SettingsPage = () =>{
   return (
     <div>
-      <h1> Settings </h1>
+      <h1 className="screen-title"> Settings </h1>
+      <div id = "form-container">
+        <form>
+          <label for="status">Status Message:</label>
+          <input type="text" id="status" name="status" value="Set Status Message"></input><br></br>
+          
+          <input type="checkbox" id="time" name="time" value="Time"></input>
+          <label for="time">Display Time</label><br></br>
+          
+          <input type="checkbox" id="date" name="date" value="Date"></input>
+          <label for="date">Display Date</label><br></br>
+          
+        </form>
+      </div>
     </div>
   )
 }

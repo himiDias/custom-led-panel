@@ -78,6 +78,7 @@ ThreadSafeQ<std::string>* server_commands_queue;
 			
 			canvas = matrix -> SwapOnVSync(canvas);
 			
+			
 			//remove from qyeye, do stuff here
 			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
