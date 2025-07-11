@@ -21,7 +21,13 @@ function App() {
     };
     
     socket.onmessage = (event) => {
-      console.log("Websocket : received from server : ",event.data);
+      const msg = event.data;
+      console.log("Websocket : received from server : ",msg);
+      //concern regarding using hardcoded index values, consider different approach using a struct perhaps
+      let sep = msg.search(":");
+      if (msg.substring(1,sep) == "'switch_screen'"){
+        setCurrentPage(msg.substring(sep+2,msg.length-2));
+      }
     };
     
     socket.onclose = () =>{
@@ -114,6 +120,16 @@ const SettingsPage = () =>{
       <h1> Settings </h1>
     </div>
   )
+}
+
+const ErrorPage = () =>{
+  return (
+    <div>
+      <h1> ERROR PAGE </h1>
+    </div>
+  
+  )
+
 }
 
 
