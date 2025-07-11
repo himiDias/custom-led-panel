@@ -13,7 +13,7 @@ namespace desk_led{
 	class Panel{
 		public:
 		
-		static int run_panel(ThreadSafeQ<std::string>& shared_queue);
+		static int run_panel(ThreadSafeQ<std::string>& shared_queue, ThreadSafeQ<std::string>& server_comm_queue);
 		
 		private:
 		

@@ -7,10 +7,12 @@
 #include <string>
 
 namespace desk_led{
+	crow::websocket::connection* client;
 	
 	void Server::run_server(ThreadSafeQ<std::string>& shared_queue)
 	{
 		crow::SimpleApp app;
+		
 		
 		std::cout << "Current workignn dir: " << std::filesystem::current_path() << std::endl;
 		crow::mustache::set_global_base("src/http_server/templates");
@@ -31,10 +33,12 @@ namespace desk_led{
 		CROW_WEBSOCKET_ROUTE(app,"/ws")
 			.onopen([&](crow::websocket::connection& conn){
 				std::cout << "Websocket : CONNECTED" << std::endl;
+				client = &conn;
 			})
 			
 			.onclose([&](crow::websocket::connection& conn, const std::string& reason, uint16_t with_status_code){
 				std::cout << "Websocket : CONNECTION CLOSED : " << reason << std::endl;
+				client = nullptr;
 			})
 			
 			.onmessage([&](crow::websocket::connection& conn, const std::string& message, bool is_binary){
@@ -76,6 +80,14 @@ namespace desk_led{
 		*/
 		app.port(18080).multithreaded().run();
 
+	}
+	
+	void Server::command_dispatcher(ThreadSafeQ<std::string>& server_comm_queue){
+		while(true){
+			auto comm = server_comm_queue.pop();
+			client->send_text(comm);
+			
+		}
 	}
 	
 }

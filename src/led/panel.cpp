@@ -23,7 +23,12 @@ StatusElement Panel::status_e(0,63,0,10);
 MainElement Panel::main_e(0,63,10,53);
 TimeElement Panel::time_e(0,63,53,63);
 
-	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue){
+ThreadSafeQ<std::string>* server_command_queue;
+
+	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue, ThreadSafeQ<std::string>& server_comm_queue){
+		
+		server_command_queue = &server_comm_queue;
+		
 		RGBMatrix::Options options;
 		options.rows = 64;
 		options.cols = 64;
