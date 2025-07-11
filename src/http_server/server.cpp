@@ -82,10 +82,10 @@ namespace desk_led{
 
 	}
 	
-	void Server::command_dispatcher(ThreadSafeQ<std::string>& server_comm_queue){
+	void Server::command_dispatcher(ThreadSafeQ<std::string>& server_cmds_queue){
 		while(true){
-			auto comm = server_comm_queue.pop();
-			client->send_text(comm);
+			auto cmd = server_cmds_queue.pop();
+			client->send_text(cmd);
 			
 		}
 	}
