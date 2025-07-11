@@ -13,7 +13,7 @@ namespace desk_led{
 	class Panel{
 		public:
 		
-		static int run_panel(ThreadSafeQ<std::string>& shared_queue, ThreadSafeQ<std::string>& server_comm_queue);
+		static int run_panel(ThreadSafeQ<std::string>& led_cmds_queue,ThreadSafeQ<std::string>& server_cmds_queue);
 		
 		private:
 		
@@ -21,7 +21,7 @@ namespace desk_led{
 		static MainElement main_e;
 		static TimeElement time_e;
 		
-		static void process_input(std::string input);
+		static void process_input(std::string input,rgb_matrix::FrameCanvas* canvas);
 	};
 	
 }

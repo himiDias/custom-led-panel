@@ -23,11 +23,12 @@ StatusElement Panel::status_e(0,63,0,10);
 MainElement Panel::main_e(0,63,10,53);
 TimeElement Panel::time_e(0,63,53,63);
 
-ThreadSafeQ<std::string>* server_command_queue;
+ThreadSafeQ<std::string>* server_commands_queue;
 
-	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue, ThreadSafeQ<std::string>& server_comm_queue){
+
+	int Panel::run_panel(ThreadSafeQ<std::string>& led_cmds_queue,ThreadSafeQ<std::string>& server_cmds_queue){
 		
-		server_command_queue = &server_comm_queue;
+		server_commands_queue = &server_cmds_queue;
 		
 		RGBMatrix::Options options;
 		options.rows = 64;
@@ -78,11 +79,11 @@ ThreadSafeQ<std::string>* server_command_queue;
 			canvas = matrix -> SwapOnVSync(canvas);
 			
 			//remove from qyeye, do stuff here
-			auto usr_inp = shared_queue.nonBlockPop();
+			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
 				std::string usr_inp_str;
 				usr_inp_str = usr_inp.value();
-				process_input(usr_inp_str);
+				process_input(usr_inp_str,canvas);
 			}
 		}
 		
@@ -94,11 +95,14 @@ ThreadSafeQ<std::string>* server_command_queue;
 		return 0;
 	}
 	
-	void Panel::process_input(std::string input){
+	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
 		int sep_key = input.find(':') +2;
 		int sep_val = input.find('-');
 		if(input.substr(sep_key,sep_val-sep_key) == "dpad") {
 			main_e.changeSelected(input[sep_val+1]);
+		}
+		else if(input.substr(sep_val+1,1) == "a"){
+			main_e.drawSelected(canvas);
 		}
 	}
 }
