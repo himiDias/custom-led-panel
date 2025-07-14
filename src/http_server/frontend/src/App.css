@@ -15,7 +15,7 @@ html, body{
 }
 
 .screen-title{
-  font-size : 15px;
+  font-size : 20px;
   
 }
 
@@ -77,15 +77,35 @@ button{
 
 /* Settings Screen */
 #form-container{
-  display : flex;
-  flex-direction : column;
-  justify-content : space-between;
-  
+  height:100vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-form{
-  font-size:20px;
+#settings-form{
   display:flex;
-  flex-direction : column;
-  align-items : center;
+  flex-direction:column;
+  background-color: blue;
+  align-items:center;
+  justify-content: space-evenly;
+  height: 50%;
 }
+
+.form-question > label{
+  font-weight: bold;
+}
+
+.form-question{
+  padding: 10px;
+}
+
+.action > input{
+  margin: 10px;
+}
+
+
+
+
+
+

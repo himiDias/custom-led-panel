@@ -120,15 +120,26 @@ const SettingsPage = () =>{
     <div>
       <div id = "form-container">
         <h1 className="screen-title"> Settings </h1>
-        <form>
-          <label for="status">Status Message:</label>
-          <input type="text" id="status" name="status" value="Set Status Message"></input><br></br>
+        <form id = "settings-form">
+          <div className = "form-question">
+            <label for="status">Status Message:</label>
+            <input type="text" id="status" name="status" value="Set Status Message"></input> 
+          </div>
           
-          <input type="checkbox" id="time" name="time" value="Time"></input>
-          <label for="time">Display Time</label><br></br>
+          <div className = "form-question">
+            <input type="checkbox" id="time" name="time" value="Time"></input>
+            <label for="time">Display Time</label> 
+          </div>
           
+          <div className = "form-question">
           <input type="checkbox" id="date" name="date" value="Date"></input>
-          <label for="date">Display Date</label><br></br>
+          <label for="date">Display Date</label> 
+          </div>
+          
+          <div className = "form-question action">
+            <input type="button" id="cancel" name="cancel" value="Cancel"></input>
+            <input type="submit" id="submit" value="Submit"></input>
+          </div>
           
         </form>
       </div>
