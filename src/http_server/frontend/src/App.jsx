@@ -118,8 +118,8 @@ async function enterLandscape(){
 const SettingsPage = () =>{
   return (
     <div>
-      <h1 className="screen-title"> Settings </h1>
       <div id = "form-container">
+        <h1 className="screen-title"> Settings </h1>
         <form>
           <label for="status">Status Message:</label>
           <input type="text" id="status" name="status" value="Set Status Message"></input><br></br>

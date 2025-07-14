@@ -1,7 +1,13 @@
-#root {
-  
+html, body{
+  margin: 0;
+  padding: 0;
 }
 
+#root {
+  min-height:100vh;
+  width:100%;
+}
+/* Main screen */
 #container{
 	display: flex;
 	justify-content: space-between;
@@ -10,6 +16,7 @@
 
 .screen-title{
   font-size : 15px;
+  
 }
 
 #btn-fs{
@@ -66,4 +73,19 @@ button{
 #dpad-r, #btn-a{
 	grid-row:2;
 	grid-column:3;
+}
+
+/* Settings Screen */
+#form-container{
+  display : flex;
+  flex-direction : column;
+  justify-content : space-between;
+  
+}
+
+form{
+  font-size:20px;
+  display:flex;
+  flex-direction : column;
+  align-items : center;
 }
