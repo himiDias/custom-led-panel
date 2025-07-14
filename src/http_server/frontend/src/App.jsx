@@ -115,29 +115,67 @@ async function enterLandscape(){
 }
 
 
-const SettingsPage = () =>{
+const SettingsPage = ({socketRef}) =>{
+
+  const [formData, setFormData] = useState({
+    status: 'Set Status Message',
+    time : false,
+    date : false,
+  });
+  
+  const handleChangeText = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]:e.target.value
+    });
+  };
+  
+  const handleChangeBool = (e) => {
+    setFormData({
+    ...formData,
+      [e.target.name]:e.target.checked
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    console.log(formData);
+    const message = JSON.stringify(formData);
+    socketRef.current.send(message);
+  };
+  
+  const handleCancel = (e) => {
+    const message = JSON.stringify(e.target.name);
+    console.log(message);
+    socketRef.current.send(message);
+  
+  };
+
+
+
   return (
     <div>
       <div id = "form-container">
         <h1 className="screen-title"> Settings </h1>
-        <form id = "settings-form">
+        <form id = "settings-form" onSubmit={handleSubmit}>
           <div className = "form-question">
             <label for="status">Status Message:</label>
-            <input type="text" id="status" name="status" value="Set Status Message"></input> 
+            <input type="text" id="status" name="status" value={formData.status} onChange={handleChangeText}></input> 
           </div>
           
           <div className = "form-question">
-            <input type="checkbox" id="time" name="time" value="Time"></input>
+            <input type="checkbox" id="time" name="time" value="Time" onChange={handleChangeBool}></input>
             <label for="time">Display Time</label> 
           </div>
           
           <div className = "form-question">
-          <input type="checkbox" id="date" name="date" value="Date"></input>
+          <input type="checkbox" id="date" name="date" value="Date" onChange={handleChangeBool}></input>
           <label for="date">Display Date</label> 
           </div>
           
           <div className = "form-question action">
-            <input type="button" id="cancel" name="cancel" value="Cancel"></input>
+            <input type="button" id="cancel" name="cancel" value="Cancel" onClick={handleCancel}></input>
             <input type="submit" id="submit" value="Submit"></input>
           </div>
           
