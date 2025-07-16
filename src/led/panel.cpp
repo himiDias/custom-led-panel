@@ -118,9 +118,13 @@ ThreadSafeQ<std::string>* server_commands_queue;
 				}
 			}
 		}else if (type == "submit-settings"){
+			status_e.setMessage(input_data["status"]);
+			time_e.showTime(input_data["time"]);
+			time_e.showDate(input_data["date"]);
+			server_commands_queue->push("{'switch_screen':'main'}");
 			
 		}else if (type == "cancel-settings"){
-			
+			server_commands_queue->push("{'switch_screen':'main'}");
 		}
 	}
 }
