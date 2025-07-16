@@ -2,6 +2,9 @@
 #include "led-matrix.h"
 #include "graphics.h"
 
+//json
+#include "json.hpp"
+
 // custom
 #include "panel.h"
 #include "status_elem.h"
@@ -16,6 +19,7 @@
 #include <string>
 
 using namespace rgb_matrix;
+using json = nlohmann::json;
 
 namespace desk_led{
 	
@@ -97,7 +101,11 @@ ThreadSafeQ<std::string>* server_commands_queue;
 	}
 	
 	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
-		std::string formatted = input.substr(1,input.size()-2);
+		
+		json input_data = json::parse(input);
+		
+		std::cout << "Type: " << input_data["type"] << std::endl;
+		/*std::string formatted = input.substr(1,input.size()-2);
 		
 		int sep_key = formatted.find(',');
 		std::string input_type = formatted.substr(0,sep_key-1);
@@ -105,7 +113,6 @@ ThreadSafeQ<std::string>* server_commands_queue;
 		
 		
 		std::cout << input_type << "::::" << formatted <<std::endl;
-		/*
 		int sep_val = input.find('-');
 		if(input.substr(sep_key,sep_val-sep_key) == "dpad") {
 			main_e.changeSelected(input[sep_val+1]);
