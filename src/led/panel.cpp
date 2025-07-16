@@ -97,7 +97,15 @@ ThreadSafeQ<std::string>* server_commands_queue;
 	}
 	
 	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
-		int sep_key = input.find(':') +2;
+		std::string formatted = input.substr(1,input.size()-2);
+		
+		int sep_key = formatted.find(',');
+		std::string input_type = formatted.substr(0,sep_key-1);
+		formatted = formatted.substr(sep_key+1,formatted.size()-sep_key);
+		
+		
+		std::cout << input_type << "::::" << formatted <<std::endl;
+		/*
 		int sep_val = input.find('-');
 		if(input.substr(sep_key,sep_val-sep_key) == "dpad") {
 			main_e.changeSelected(input[sep_val+1]);
@@ -107,6 +115,6 @@ ThreadSafeQ<std::string>* server_commands_queue;
 			if (cmd != ""){
 				server_commands_queue->push(cmd);
 			}
-		}
+		}*/
 	}
 }
