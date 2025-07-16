@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   // change back to 'main', using diffreent for developing
-  const [currentPage, setCurrentPage] = useState('settings');
+  const [currentPage, setCurrentPage] = useState('main');
   
   const socketRef = useRef(null);
   
@@ -47,7 +47,7 @@ function App() {
       case 'main':
         return <MainPage  socketRef = {socketRef}/>;
       case 'settings':
-        return <SettingsPage />;
+        return <SettingsPage socketRef = {socketRef}/>;
       default:
         return <ErrorPage/>;
     }
@@ -95,7 +95,10 @@ function ControllerButton({id,text,socket}){
   
   function handleClick(id){
     console.log("Button : ",id," clicked");
-    const message = JSON.stringify({id});
+    const message = JSON.stringify({type: 'action',id});
+    //const idObj = JSON.parse(msg);
+    
+    //const message = JSON.stringify({
     socket.current.send(message);
   }
 }
@@ -118,6 +121,7 @@ async function enterLandscape(){
 const SettingsPage = ({socketRef}) =>{
 
   const [formData, setFormData] = useState({
+    type : 'submit-settings',
     status: 'Set Status Message',
     time : false,
     date : false,
@@ -140,13 +144,14 @@ const SettingsPage = ({socketRef}) =>{
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    console.log(formData);
+    
     const message = JSON.stringify(formData);
+    console.log(message);
     socketRef.current.send(message);
   };
   
   const handleCancel = (e) => {
-    const message = JSON.stringify(e.target.name);
+    const message = JSON.stringify({type:'cancel-settings'});
     console.log(message);
     socketRef.current.send(message);
   
@@ -160,18 +165,18 @@ const SettingsPage = ({socketRef}) =>{
         <h1 className="screen-title"> Settings </h1>
         <form id = "settings-form" onSubmit={handleSubmit}>
           <div className = "form-question">
-            <label for="status">Status Message:</label>
+            <label htmlFor="status">Status Message:</label>
             <input type="text" id="status" name="status" value={formData.status} onChange={handleChangeText}></input> 
           </div>
           
           <div className = "form-question">
             <input type="checkbox" id="time" name="time" value="Time" onChange={handleChangeBool}></input>
-            <label for="time">Display Time</label> 
+            <label htmlFor="time">Display Time</label> 
           </div>
           
           <div className = "form-question">
           <input type="checkbox" id="date" name="date" value="Date" onChange={handleChangeBool}></input>
-          <label for="date">Display Date</label> 
+          <label htmlFor="date">Display Date</label> 
           </div>
           
           <div className = "form-question action">
