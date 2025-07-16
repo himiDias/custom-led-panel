@@ -104,24 +104,23 @@ ThreadSafeQ<std::string>* server_commands_queue;
 		
 		json input_data = json::parse(input);
 		
-		std::cout << "Type: " << input_data["type"] << std::endl;
-		/*std::string formatted = input.substr(1,input.size()-2);
-		
-		int sep_key = formatted.find(',');
-		std::string input_type = formatted.substr(0,sep_key-1);
-		formatted = formatted.substr(sep_key+1,formatted.size()-sep_key);
-		
-		
-		std::cout << input_type << "::::" << formatted <<std::endl;
-		int sep_val = input.find('-');
-		if(input.substr(sep_key,sep_val-sep_key) == "dpad") {
-			main_e.changeSelected(input[sep_val+1]);
-		}
-		else if(input.substr(sep_val+1,1) == "a"){
-			std::string cmd = main_e.drawSelected(canvas);
-			if (cmd != ""){
-				server_commands_queue->push(cmd);
+		std::string type = input_data["type"];
+		if (type == "action"){
+			std::string cmd = input_data["id"];
+			int sep_val = cmd.find('-');
+			if(cmd.substr(0,sep_val) == "dpad") {
+				main_e.changeSelected(cmd[sep_val+1]);
 			}
-		}*/
+			else if(cmd.substr(sep_val+1,1) == "a"){
+				std::string ret_cmd = main_e.drawSelected(canvas);
+				if (ret_cmd != ""){
+					server_commands_queue->push(ret_cmd);
+				}
+			}
+		}else if (type == "submit-settings"){
+			
+		}else if (type == "cancel-settings"){
+			
+		}
 	}
 }
