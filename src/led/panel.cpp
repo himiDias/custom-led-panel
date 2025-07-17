@@ -29,6 +29,9 @@ TimeElement Panel::time_e(0,63,53,63);
 
 ThreadSafeQ<std::string>* server_commands_queue;
 
+FrameCanvas* canvas_main;
+FrameCanvas* canvas_paint;
+
 
 	int Panel::run_panel(ThreadSafeQ<std::string>& led_cmds_queue,ThreadSafeQ<std::string>& server_cmds_queue){
 		
@@ -48,8 +51,21 @@ ThreadSafeQ<std::string>* server_commands_queue;
 		RuntimeOptions runtime_options;
 		RGBMatrix *matrix = CreateMatrixFromOptions(options,runtime_options);
 		
-		FrameCanvas *canvas = matrix->CreateFrameCanvas();
+		canvas_main = matrix->CreateFrameCanvas();
+		canvas_paint = matrix->CreateFrameCanvas();
 		
+		
+		FrameCanvas **current_canvas = &canvas_main;
+		
+		//setting up main canvas
+		status_e.drawBorders(canvas_main);
+		status_e.scrollText(canvas_main);
+			
+		time_e.drawBorders(canvas_main);
+		time_e.drawTime(canvas_main);
+			
+		main_e.drawBorders(canvas_main);
+		main_e.drawOptions(canvas_main);
 		
 		/*
 		StatusElement status_e(0,63,0,10);
@@ -70,25 +86,26 @@ ThreadSafeQ<std::string>* server_commands_queue;
 		while (true){
 			
 			usleep(50000);
-			//counter++;
-			status_e.drawBorders(canvas);
-			status_e.scrollText(canvas);
 			
-			time_e.drawBorders(canvas);
-			time_e.drawTime(canvas);
-			
-			main_e.drawBorders(canvas);
-			main_e.drawOptions(canvas);
-			
-			canvas = matrix -> SwapOnVSync(canvas);
-			
+			//check which screen/canvas is currently being displayed
+			if (*current_canvas == canvas_main){
+				status_e.drawBorders(canvas_main);
+				status_e.scrollText(canvas_main);
+				
+				time_e.drawBorders(canvas_main);
+				time_e.drawTime(canvas_main);
+				
+				main_e.drawBorders(canvas_main);
+				main_e.drawOptions(canvas_main);
+			}
+			*current_canvas = matrix -> SwapOnVSync(*current_canvas);
 			
 			//remove from qyeye, do stuff here
 			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
 				std::string usr_inp_str;
 				usr_inp_str = usr_inp.value();
-				process_input(usr_inp_str,canvas);
+				process_input(usr_inp_str,current_canvas);
 			}
 		}
 		
@@ -100,7 +117,7 @@ ThreadSafeQ<std::string>* server_commands_queue;
 		return 0;
 	}
 	
-	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
+	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas**& canvas_ptr){
 		
 		json input_data = json::parse(input);
 		
@@ -112,9 +129,12 @@ ThreadSafeQ<std::string>* server_commands_queue;
 				main_e.changeSelected(cmd[sep_val+1]);
 			}
 			else if(cmd.substr(sep_val+1,1) == "a"){
-				std::string ret_cmd = main_e.drawSelected(canvas);
+				std::string ret_cmd = main_e.getSelected();
 				if (ret_cmd != ""){
 					server_commands_queue->push(ret_cmd);
+					if (ret_cmd == "{'switch_screen':'paint'}"){
+						 canvas_ptr = &canvas_paint;
+					}
 				}
 			}
 		}else if (type == "submit-settings"){

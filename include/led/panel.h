@@ -21,7 +21,7 @@ namespace desk_led{
 		static MainElement main_e;
 		static TimeElement time_e;
 		
-		static void process_input(std::string input,rgb_matrix::FrameCanvas* canvas);
+		static void process_input(std::string input,rgb_matrix::FrameCanvas**& canvas_ptr);
 	};
 	
 }

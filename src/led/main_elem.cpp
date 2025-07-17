@@ -71,12 +71,14 @@ namespace desk_led{
 		
 	}
 	
-	std::string MainElement::drawSelected(rgb_matrix::FrameCanvas* canvas) const{
+	std::string MainElement::getSelected() const{
 		// CHANGE DECLARATION
 		// WOULD EITHER, return nullptr or return std::string command, this would be pushed onto the server_cmds_queue
 		
 		if (typeid(*selected) == typeid(IconSettings)){
 			return "{'switch_screen':'settings'}";
+		}else if (typeid(*selected) == typeid(IconDisplay)){
+			return "{'switch_screen':'paint'}";
 		}
 		
 		return "";
