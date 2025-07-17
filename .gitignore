@@ -2,6 +2,5 @@
 *.o
 
 # Ignore executable
-run_panel
+bin/run_desk_panel
 
-bin/http_server
