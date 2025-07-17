@@ -2,6 +2,9 @@
 #include "led-matrix.h"
 #include "graphics.h"
 
+//json
+#include "json.hpp"
+
 // custom
 #include "panel.h"
 #include "status_elem.h"
@@ -16,6 +19,7 @@
 #include <string>
 
 using namespace rgb_matrix;
+using json = nlohmann::json;
 
 namespace desk_led{
 	
@@ -23,7 +27,13 @@ StatusElement Panel::status_e(0,63,0,10);
 MainElement Panel::main_e(0,63,10,53);
 TimeElement Panel::time_e(0,63,53,63);
 
-	int Panel::run_panel(ThreadSafeQ<std::string>& shared_queue){
+ThreadSafeQ<std::string>* server_commands_queue;
+
+
+	int Panel::run_panel(ThreadSafeQ<std::string>& led_cmds_queue,ThreadSafeQ<std::string>& server_cmds_queue){
+		
+		server_commands_queue = &server_cmds_queue;
+		
 		RGBMatrix::Options options;
 		options.rows = 64;
 		options.cols = 64;
@@ -72,12 +82,13 @@ TimeElement Panel::time_e(0,63,53,63);
 			
 			canvas = matrix -> SwapOnVSync(canvas);
 			
+			
 			//remove from qyeye, do stuff here
-			auto usr_inp = shared_queue.nonBlockPop();
+			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
 				std::string usr_inp_str;
 				usr_inp_str = usr_inp.value();
-				process_input(usr_inp_str);
+				process_input(usr_inp_str,canvas);
 			}
 		}
 		
@@ -89,10 +100,31 @@ TimeElement Panel::time_e(0,63,53,63);
 		return 0;
 	}
 	
-	void Panel::process_input(std::string input){
-		if(input.substr(0,4) == "dpad") {
-			//char* comm = (input.substr(5,6)).c_str()
-			main_e.changeSelected(input[5]);
+	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
+		
+		json input_data = json::parse(input);
+		
+		std::string type = input_data["type"];
+		if (type == "action"){
+			std::string cmd = input_data["id"];
+			int sep_val = cmd.find('-');
+			if(cmd.substr(0,sep_val) == "dpad") {
+				main_e.changeSelected(cmd[sep_val+1]);
+			}
+			else if(cmd.substr(sep_val+1,1) == "a"){
+				std::string ret_cmd = main_e.drawSelected(canvas);
+				if (ret_cmd != ""){
+					server_commands_queue->push(ret_cmd);
+				}
+			}
+		}else if (type == "submit-settings"){
+			status_e.setMessage(input_data["status"]);
+			time_e.showTime(input_data["time"]);
+			time_e.showDate(input_data["date"]);
+			server_commands_queue->push("{'switch_screen':'main'}");
+			
+		}else if (type == "cancel-settings"){
+			server_commands_queue->push("{'switch_screen':'main'}");
 		}
 	}
 }

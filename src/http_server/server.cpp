@@ -7,20 +7,52 @@
 #include <string>
 
 namespace desk_led{
+	crow::websocket::connection* client;
 	
 	void Server::run_server(ThreadSafeQ<std::string>& shared_queue)
 	{
 		crow::SimpleApp app;
 		
+		
 		std::cout << "Current workignn dir: " << std::filesystem::current_path() << std::endl;
 		crow::mustache::set_global_base("src/http_server/templates");
 	 
-		
+		// User end pages
+		/*
 		CROW_ROUTE(app,"/")([](){
 			auto page = crow::mustache::load("controller.html");
 			return page.render();
 		});
+			
 		
+		CROW_ROUTE(app,"/settings")([](){
+			auto page = crow::mustache::load("settings.html");
+			return page.render();
+		});*/
+		
+		CROW_WEBSOCKET_ROUTE(app,"/ws")
+			.onopen([&](crow::websocket::connection& conn){
+				std::cout << "Websocket : CONNECTED" << std::endl;
+				client = &conn;
+			})
+			
+			.onclose([&](crow::websocket::connection& conn, const std::string& reason, uint16_t with_status_code){
+				std::cout << "Websocket : CONNECTION CLOSED : " << reason << std::endl;
+				client = nullptr;
+			})
+			
+			.onmessage([&](crow::websocket::connection& conn, const std::string& message, bool is_binary){
+				std::cout << "Websocket : CLIENT MESSAGE : " << message << std::endl;
+				shared_queue.push(message);
+			})
+			
+			.onerror([&](crow::websocket::connection& conn, const std::string& error_message){
+				std::cerr << "Websocket : ERROR OCCURRED : " << error_message << std::endl;
+			});
+		
+		
+		// Intermediate pages
+		/*COMMENTED FOR TESTING, USING REACT INSTEAD, 
 		CROW_ROUTE(app,"/static/<string>")([](const std::string& filename){
 			std::ifstream in ("src/http_server/static/"+filename,std::ifstream::in);
 			
@@ -45,9 +77,17 @@ namespace desk_led{
 			
 			return crow::response(200,"Button " + id + "received");
 		});	
-		
+		*/
 		app.port(18080).multithreaded().run();
 
+	}
+	
+	void Server::command_dispatcher(ThreadSafeQ<std::string>& server_cmds_queue){
+		while(true){
+			auto cmd = server_cmds_queue.pop();
+			client->send_text(cmd);
+			
+		}
 	}
 	
 }

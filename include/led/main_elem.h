@@ -18,7 +18,7 @@ namespace desk_led{
 		
 		void drawOptions(rgb_matrix::FrameCanvas* canvas) const;
 		
-		void drawSelected(rgb_matrix::FrameCanvas* canvas) const;
+		std::string drawSelected(rgb_matrix::FrameCanvas* canvas) const;
 		
 		//currently using this to free memory, CONSIDER smart pointers
 		void deleteOptions();

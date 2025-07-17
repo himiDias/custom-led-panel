@@ -17,9 +17,10 @@ LDLIBS = -lrgbmatrix -lrt -lm -lpthread
 INC_PATHS = -I$(INCLUDE_DIR) \
 -I$(INCLUDE_DIR)/led \
 -I$(INCLUDE_DIR)/server \
+-I$(LIB_DIR)/ \
 -I$(LIB_DIR)/rpi-rgb-led-matrix/include \
 -I$(LIB_DIR)/Crow/include \
--I$(LIB_DIR)/asio/asio/include
+-I$(LIB_DIR)/asio/asio/include 
 
 #--Source---
 LED_SOURCES = $(SRC_DIR)/led/panel.cpp \

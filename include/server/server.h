@@ -12,6 +12,8 @@ namespace desk_led{
 		
 		static void run_server(ThreadSafeQ<std::string>& shared_queue);
 		
+		static void command_dispatcher(ThreadSafeQ<std::string>& server_cmds_queue);
+		
 	};
 
 }

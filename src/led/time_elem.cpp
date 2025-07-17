@@ -47,8 +47,10 @@ namespace desk_led{
 			}
 			if(display_time){
 				display_message = time_message;
-			}else{
+			}else if(display_date){
 				display_message = date_message;
+			}else{
+				display_message = "";
 			}
 			width = display_message.length() * 6;
 		}
