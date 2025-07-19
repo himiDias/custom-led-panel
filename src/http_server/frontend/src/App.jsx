@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   // change back to 'main', using diffreent for developing
-  const [currentPage, setCurrentPage] = useState('main');
+  const [currentPage, setCurrentPage] = useState('paint');
   
   const socketRef = useRef(null);
   
@@ -48,6 +48,8 @@ function App() {
         return <MainPage  socketRef = {socketRef}/>;
       case 'settings':
         return <SettingsPage socketRef = {socketRef}/>;
+      case 'paint':
+        return <PaintPage socketRef = {socketRef}/>;
       default:
         return <ErrorPage/>;
     }
@@ -188,6 +190,35 @@ const SettingsPage = ({socketRef}) =>{
       </div>
     </div>
   )
+}
+
+const PaintPage = ({socketRef}) => {
+  
+  const PixelButton = ({x_coord,y_coord,colour}) =>{
+    return <button className = "paint-button" data-x = {x-coord} data-y = {y-coord} data-col = {colour} onClick={handleSetPixel}></button>
+  }
+  
+  const handleSetPixel = (e) =>{
+    const x = e.target.getAttribute("data-x");
+    const y = e.target.getAttribute("data-y");
+    const colour = e.target.getAttribute("data-col");
+    
+    const message = JSON.stringify({type: 'setpixel-paint',x,y,colour});
+    // Change when colour is null to be clearpixel-paint
+    console.log(message);
+    
+    socketRef.current.send(message);
+    
+  }
+
+
+  return(
+    <div>
+        
+    </div>
+  )
+
+
 }
 
 const ErrorPage = () =>{
