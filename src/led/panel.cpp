@@ -24,10 +24,14 @@ using namespace rgb_matrix;
 using json = nlohmann::json;
 
 namespace desk_led{
-	
+
+//menu elements	
 StatusElement Panel::status_e(0,63,0,10);
 MainElement Panel::main_e(0,63,10,53);
 TimeElement Panel::time_e(0,63,53,63);
+
+//paint element
+PaintElement Panel::paint_e(0,63,0,63);
 
 ThreadSafeQ<std::string>* server_commands_queue;
 
@@ -54,8 +58,6 @@ bool on_scene_switch = true;
 		RGBMatrix *matrix = CreateMatrixFromOptions(options,runtime_options);
 		
 		FrameCanvas* canvas= matrix->CreateFrameCanvas();
-		
-		PaintElement paint_e(0,63,0,63);
 		
 
 		while (true){
@@ -153,6 +155,10 @@ bool on_scene_switch = true;
 			
 		}else if (type == "cancel-settings"){
 			server_commands_queue->push("{'switch_screen':'main'}");
+		}else if (type == "setpixel-paint"){
+			//insert code for extracting coordincated and colour, then sert pixel
+		}else if (type == "clearpixel-paint"){
+			//insert code for getting coordinates then clear pixel
 		}
 	}
 }

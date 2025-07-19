@@ -12,6 +12,14 @@ namespace desk_led{
 		
 	}
 	
+	void PaintElement::setPixel(int x_pos, int y_pos, rgb_matrix::Color colour, rgb_matrix::FrameCanvas* canvas){
+		canvas->SetPixel(x_pos,y_pos,colour.r,colour.g,colour.b);
+	}
+	
+	void PaintElement::clearPixel(int x_pos, int y_pos, rgb_matrix::FrameCanvas* canvas){
+		canvas->SetPixel(x_pos,y_pos,0,0,0);
+		
+	}
 	
 	
 	

@@ -7,6 +7,8 @@
 #include "time_elem.h"
 #include "main_elem.h"
 
+#include "paint_elem.h"
+
 #include <string>
 
 namespace desk_led{
@@ -29,6 +31,8 @@ namespace desk_led{
 		static StatusElement status_e;
 		static MainElement main_e;
 		static TimeElement time_e;
+		
+		static PaintElement paint_e;
 		
 		static SceneState scene;
 		
