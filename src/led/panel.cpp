@@ -31,8 +31,8 @@ TimeElement Panel::time_e(0,63,53,63);
 
 ThreadSafeQ<std::string>* server_commands_queue;
 
-FrameCanvas* canvas_main;
-FrameCanvas* canvas_paint;
+SceneState Panel::scene = SCENE_MENU;
+bool on_scene_switch = true;
 
 
 	int Panel::run_panel(ThreadSafeQ<std::string>& led_cmds_queue,ThreadSafeQ<std::string>& server_cmds_queue){
@@ -53,65 +53,66 @@ FrameCanvas* canvas_paint;
 		RuntimeOptions runtime_options;
 		RGBMatrix *matrix = CreateMatrixFromOptions(options,runtime_options);
 		
-		canvas_main = matrix->CreateFrameCanvas();
-		canvas_paint = matrix->CreateFrameCanvas();
-		
-		
-		FrameCanvas **current_canvas = &canvas_main;
-		
-		//setting up main canvas
-		status_e.drawBorders(canvas_main);
-		status_e.scrollText(canvas_main);
-			
-		time_e.drawBorders(canvas_main);
-		time_e.drawTime(canvas_main);
-			
-		main_e.drawBorders(canvas_main);
-		main_e.drawOptions(canvas_main);
-		
-		/*
-		StatusElement status_e(0,63,0,10);
-		 
-		
-		MainElement main_e(0,63,10,53);
-		 
-		
-		TimeElement time_e(0,63,53,63);*/
-	
-		//canvas = matrix -> SwapOnVSync(canvas);
-		
-		
-		// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION (2nd is integrated, not as efficient, change later)
+		FrameCanvas* canvas= matrix->CreateFrameCanvas();
 		
 		PaintElement paint_e(0,63,0,63);
 		
-		//int counter = 0;
+
 		while (true){
 			
 			usleep(50000);
 			
-			//check which screen/canvas is currently being displayed
-			if (*current_canvas == canvas_main){
-				status_e.drawBorders(canvas_main);
-				status_e.scrollText(canvas_main);
-				
-				time_e.drawBorders(canvas_main);
-				time_e.drawTime(canvas_main);
-				
-				main_e.drawBorders(canvas_main);
-				main_e.drawOptions(canvas_main);
-			}else if (*current_canvas == canvas_paint){
-				paint_e.drawBorders(canvas_paint);
-				paint_e.clearContents(canvas_paint);
+			switch (scene){
+				case SCENE_MENU:
+					if (on_scene_switch){
+						canvas->Clear();
+						
+						//status_e.drawBorders(canvas);
+						main_e.drawBorders(canvas);
+						time_e.drawBorders(canvas);
+						
+						//reset back buffer as well
+						canvas = matrix -> SwapOnVSync(canvas);
+						canvas->Clear();
+						main_e.drawBorders(canvas);
+						time_e.drawBorders(canvas);
+						
+						on_scene_switch = false;
+						
+					}
+					status_e.drawBorders(canvas);
+					status_e.scrollText(canvas);
+					
+					time_e.drawTime(canvas);
+				 
+					main_e.drawOptions(canvas);
+					
+					break;
+				case SCENE_PAINT:
+					if (on_scene_switch){
+						canvas->Clear();
+						paint_e.drawBorders(canvas);
+						
+						//reset back buffer as well
+						canvas = matrix -> SwapOnVSync(canvas);
+						canvas->Clear();
+						paint_e.drawBorders(canvas);
+						
+						on_scene_switch = false;
+					}
+					break;
+				default:
+					break;
 			}
-			*current_canvas = matrix -> SwapOnVSync(*current_canvas);
+
+			canvas = matrix -> SwapOnVSync(canvas);
 			
 			//remove from qyeye, do stuff here
 			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
 				std::string usr_inp_str;
 				usr_inp_str = usr_inp.value();
-				process_input(usr_inp_str,current_canvas);
+				process_input(usr_inp_str,canvas);
 			}
 		}
 		
@@ -123,7 +124,7 @@ FrameCanvas* canvas_paint;
 		return 0;
 	}
 	
-	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas**& canvas_ptr){
+	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
 		
 		json input_data = json::parse(input);
 		
@@ -139,7 +140,8 @@ FrameCanvas* canvas_paint;
 				if (ret_cmd != ""){
 					server_commands_queue->push(ret_cmd);
 					if (ret_cmd == "{'switch_screen':'paint'}"){
-						 canvas_ptr = &canvas_paint;
+						 scene = SCENE_PAINT;
+						 on_scene_switch = true;
 					}
 				}
 			}

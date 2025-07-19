@@ -10,6 +10,15 @@
 #include <string>
 
 namespace desk_led{
+	
+	enum SceneState{
+		SCENE_MENU,
+		SCENE_PAINT,
+		SCENE_GAMES,
+		SCENE_SS
+		
+	};
+	
 	class Panel{
 		public:
 		
@@ -21,7 +30,9 @@ namespace desk_led{
 		static MainElement main_e;
 		static TimeElement time_e;
 		
-		static void process_input(std::string input,rgb_matrix::FrameCanvas**& canvas_ptr);
+		static SceneState scene;
+		
+		static void process_input(std::string input,rgb_matrix::FrameCanvas* canvas);
 	};
 	
 }
