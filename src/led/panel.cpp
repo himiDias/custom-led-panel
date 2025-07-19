@@ -11,6 +11,8 @@
 #include "time_elem.h"
 #include "main_elem.h"
 
+#include "paint_elem.h"
+
 #include "thread_safe_queue.h"
 
 // standard
@@ -81,6 +83,7 @@ FrameCanvas* canvas_paint;
 		
 		// NOTE: FLICKERING IS DUE TO BUFFER FRAMES, FIX BY REDRAWING BORDERS ON BOTH FRAMES, OR REDRAW BORDERS EACH ITERATION (2nd is integrated, not as efficient, change later)
 		
+		PaintElement paint_e(0,63,0,63);
 		
 		//int counter = 0;
 		while (true){
@@ -97,6 +100,9 @@ FrameCanvas* canvas_paint;
 				
 				main_e.drawBorders(canvas_main);
 				main_e.drawOptions(canvas_main);
+			}else if (*current_canvas == canvas_paint){
+				paint_e.drawBorders(canvas_paint);
+				paint_e.clearContents(canvas_paint);
 			}
 			*current_canvas = matrix -> SwapOnVSync(*current_canvas);
 			

@@ -33,6 +33,7 @@ $(SRC_DIR)/led/settings_icon.cpp \
 $(SRC_DIR)/led/display_icon.cpp \
 $(SRC_DIR)/led/games_icon.cpp \
 $(SRC_DIR)/led/screensaver_icon.cpp \
+$(SRC_DIR)/led/paint_elem.cpp \
 
 LED_OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(LED_SOURCES))
 
