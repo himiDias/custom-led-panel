@@ -195,7 +195,7 @@ const SettingsPage = ({socketRef}) =>{
 const PaintPage = ({socketRef}) => {
   
   const PixelButton = ({x_coord,y_coord,colour}) =>{
-    return <button className = "paint-button" data-x = {x-coord} data-y = {y-coord} data-col = {colour} onClick={handleSetPixel}></button>
+    return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = {colour} onClick={handleSetPixel}></button>
   }
   
   const handleSetPixel = (e) =>{
@@ -207,14 +207,35 @@ const PaintPage = ({socketRef}) => {
     // Change when colour is null to be clearpixel-paint
     console.log(message);
     
-    socketRef.current.send(message);
+    //socketRef.current.send(message);
     
   }
 
+  const gridSize = 62;
+  
+  
 
   return(
-    <div>
-        
+    <div id = "paint-container">
+      <h1 className = "screen-title">Paint</h1>
+      <div id = "paint-options">
+        <div id = "colour-selector">
+        colour selector
+        </div>
+        <div id = "paint-grid">
+            {Array.from({ length:gridSize}, (_, x) => 
+              Array.from({ length:gridSize}, (_, y) => (
+              <PixelButton x_coord = {x} y_coord = {y} colour = {null}/>
+              ))
+            )}
+        </div>
+        <div id = "tool-selector">
+        tool selector
+        </div>
+      </div>
+      <div id = "save-options">
+        <button>Back</button>
+      </div>
     </div>
   )
 

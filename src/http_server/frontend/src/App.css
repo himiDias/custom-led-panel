@@ -105,6 +105,48 @@ button{
 }
 
 
+/* Paint Screen */
+
+#paint-container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#paint-options{
+  display:flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+#paint-grid{
+  display:grid;
+  grid-template-columns: repeat(62,12px);
+  grid-template-rows: repeat(62,12px);
+  gap: 1px;
+  border: 2px solid;
+  padding: 4px;
+  background-color:grey;
+  width : fit-content;
+  margin : auto;
+
+}
+
+.paint-button{
+  background-color:black;
+  border: 2px solid grey;
+  width:12px;
+  height:12px;
+  min-width:12px;
+  min-height:12px;
+  max-width:12px;
+  max-height:12px;
+  padding:0;
+  
+}
+
+
 
 
 
