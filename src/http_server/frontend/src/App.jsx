@@ -199,11 +199,23 @@ const PaintPage = ({socketRef}) => {
   }
   
   const handleSetPixel = (e) =>{
+    
+  
+  
+  
+  
     const x = e.target.getAttribute("data-x");
     const y = e.target.getAttribute("data-y");
     const colour = e.target.getAttribute("data-col");
     
-    const message = JSON.stringify({type: 'setpixel-paint',x,y,colour});
+    let message = "";
+    if (colour == "null"){
+      message = JSON.stringify({type: 'setpixel-paint',x,y,colour});
+    }
+    else{
+      message = JSON.stringify({type: 'clearpixel-paint',x,y});
+    }
+   
     // Change when colour is null to be clearpixel-paint
     console.log(message);
     
