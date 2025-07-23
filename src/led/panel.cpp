@@ -166,8 +166,10 @@ bool on_scene_switch = true;
 			int g = std::stoi(g_hex,0,16);
 			int b = std::stoi(b_hex,0,16);
 			
-			int x = ((int)input_data["x"])+1;
-			int y = ((int)input_data["y"])+1;
+			std::string x_str = input_data["x"];
+			std::string y_str = input_data["y"];
+			int x = std::stoi(x_str)+1;
+			int y = std::stoi(y_str)+1;
 			//rgb_matrix::Color colour = rgb_matrix::Color();
 			paint_e.setPixel(x,y,rgb_matrix::Color(r,g,b),canvas);
 			//insert code for extracting coordincated and colour, then sert pixel
