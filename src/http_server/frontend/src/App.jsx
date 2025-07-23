@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   // change back to 'main', using diffreent for developing
-  const [currentPage, setCurrentPage] = useState('paint');
+  const [currentPage, setCurrentPage] = useState('main');
   
   const socketRef = useRef(null);
   

@@ -156,6 +156,20 @@ bool on_scene_switch = true;
 		}else if (type == "cancel-settings"){
 			server_commands_queue->push("{'switch_screen':'main'}");
 		}else if (type == "setpixel-paint"){
+			std::string colour = input_data["colour"];
+			
+			std::string r_hex = colour.substr(1,2);
+			std::string g_hex = colour.substr(3,2);
+			std::string b_hex = colour.substr(5,2);
+			
+			int r = std::stoi(r_hex,0,16);
+			int g = std::stoi(g_hex,0,16);
+			int b = std::stoi(b_hex,0,16);
+			
+			int x = ((int)input_data["x"])+1;
+			int y = ((int)input_data["y"])+1;
+			//rgb_matrix::Color colour = rgb_matrix::Color();
+			paint_e.setPixel(x,y,rgb_matrix::Color(r,g,b),canvas);
 			//insert code for extracting coordincated and colour, then sert pixel
 		}else if (type == "clearpixel-paint"){
 			//insert code for getting coordinates then clear pixel
