@@ -193,14 +193,21 @@ const SettingsPage = ({socketRef}) =>{
 }
 
 const PaintPage = ({socketRef}) => {
+
+  let selectedColour = '#FFFFFF';
+  let selectedTool = 'brush';
   
-  const PixelButton = ({x_coord,y_coord,colour}) =>{
-    return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = {colour} onClick={handleSetPixel}></button>
+  const PixelButton = ({x_coord,y_coord}) =>{
+    return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = "" onClick={handleSetPixel}></button>
   }
   
   const handleSetPixel = (e) =>{
     
-  
+    if (selectedTool == 'brush'){
+      e.target.setAttribute("data-col",selectedColour);
+    }else if (selectedTool == 'erase'){
+      e.target.setAttribute("data-col","");
+    }
   
   
   
@@ -209,7 +216,7 @@ const PaintPage = ({socketRef}) => {
     const colour = e.target.getAttribute("data-col");
     
     let message = "";
-    if (colour == "null"){
+    if (colour != ""){
       message = JSON.stringify({type: 'setpixel-paint',x,y,colour});
     }
     else{
@@ -237,7 +244,7 @@ const PaintPage = ({socketRef}) => {
         <div id = "paint-grid">
             {Array.from({ length:gridSize}, (_, x) => 
               Array.from({ length:gridSize}, (_, y) => (
-              <PixelButton x_coord = {x} y_coord = {y} colour = {null}/>
+              <PixelButton x_coord = {x} y_coord = {y}/>
               ))
             )}
         </div>
