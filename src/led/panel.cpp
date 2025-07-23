@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <string>
+#include <functional>
 
 using namespace rgb_matrix;
 using json = nlohmann::json;
@@ -107,15 +108,20 @@ bool on_scene_switch = true;
 					break;
 			}
 
-			canvas = matrix -> SwapOnVSync(canvas);
 			
 			//remove from qyeye, do stuff here
 			auto usr_inp = led_cmds_queue.nonBlockPop();
 			if (usr_inp){
 				std::string usr_inp_str;
 				usr_inp_str = usr_inp.value();
-				process_input(usr_inp_str,canvas);
+				auto action = process_input(usr_inp_str,canvas);
+				
+				action();
+				canvas = matrix -> SwapOnVSync(canvas);
+				action();
+				
 			}
+			canvas = matrix -> SwapOnVSync(canvas);
 		}
 		
 		std::cout << "Matrix cleared, Exiting," << std::endl;
@@ -126,11 +132,12 @@ bool on_scene_switch = true;
 		return 0;
 	}
 	
-	void Panel::process_input(std::string input,rgb_matrix::FrameCanvas* canvas){
+	std::function<void()> Panel::process_input(std::string input,rgb_matrix::FrameCanvas*& canvas){
 		
 		json input_data = json::parse(input);
 		
 		std::string type = input_data["type"];
+		
 		if (type == "action"){
 			std::string cmd = input_data["id"];
 			int sep_val = cmd.find('-');
@@ -156,11 +163,11 @@ bool on_scene_switch = true;
 		}else if (type == "cancel-settings"){
 			server_commands_queue->push("{'switch_screen':'main'}");
 		}else if (type == "setpixel-paint"){
-			std::string colour = input_data["colour"];
+			std::string colour_hex = input_data["colour"];
 			
-			std::string r_hex = colour.substr(1,2);
-			std::string g_hex = colour.substr(3,2);
-			std::string b_hex = colour.substr(5,2);
+			std::string r_hex = colour_hex.substr(1,2);
+			std::string g_hex = colour_hex.substr(3,2);
+			std::string b_hex = colour_hex.substr(5,2);
 			
 			int r = std::stoi(r_hex,0,16);
 			int g = std::stoi(g_hex,0,16);
@@ -170,11 +177,12 @@ bool on_scene_switch = true;
 			std::string y_str = input_data["y"];
 			int x = std::stoi(x_str)+1;
 			int y = std::stoi(y_str)+1;
-			//rgb_matrix::Color colour = rgb_matrix::Color();
-			paint_e.setPixel(x,y,rgb_matrix::Color(r,g,b),canvas);
-			//insert code for extracting coordincated and colour, then sert pixel
+			
+			return [x,y,colour,&canvas]() {paint_e.setPixel(x,y,colour,canvas);};
 		}else if (type == "clearpixel-paint"){
 			//insert code for getting coordinates then clear pixel
 		}
+		
+		return []() {};
 	}
 }

@@ -244,8 +244,8 @@ const PaintPage = ({socketRef}) => {
         colour selector
         </div>
         <div id = "paint-grid">
-            {Array.from({ length:gridSize}, (_, x) => 
-              Array.from({ length:gridSize}, (_, y) => (
+            {Array.from({ length:gridSize}, (_, y) => 
+              Array.from({ length:gridSize}, (_, x) => (
               <PixelButton x_coord = {x} y_coord = {y}/>
               ))
             )}

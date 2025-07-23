@@ -10,6 +10,7 @@
 #include "paint_elem.h"
 
 #include <string>
+#include <functional>
 
 namespace desk_led{
 	
@@ -36,7 +37,7 @@ namespace desk_led{
 		
 		static SceneState scene;
 		
-		static void process_input(std::string input,rgb_matrix::FrameCanvas* canvas);
+		static std::function<void()> process_input(std::string input,rgb_matrix::FrameCanvas*& canvas);
 	};
 	
 }
