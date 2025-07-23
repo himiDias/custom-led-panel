@@ -208,6 +208,8 @@ const PaintPage = ({socketRef}) => {
     }else if (selectedTool == 'erase'){
       e.target.setAttribute("data-col","");
     }
+    
+    e.target.style.setProperty('--main-color',e.target.getAttribute('data-col'));
   
   
   
@@ -226,7 +228,7 @@ const PaintPage = ({socketRef}) => {
     // Change when colour is null to be clearpixel-paint
     console.log(message);
     
-    //socketRef.current.send(message);
+    socketRef.current.send(message);
     
   }
 
