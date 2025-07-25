@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   // change back to 'main', using diffreent for developing
-  const [currentPage, setCurrentPage] = useState('paint');
+  const [currentPage, setCurrentPage] = useState('main');
   
   const socketRef = useRef(null);
   
@@ -194,21 +194,26 @@ const SettingsPage = ({socketRef}) =>{
 
 const PaintPage = ({socketRef}) => {
 
-  const colourPicker = document.getElementById('colour-picker');
+   
   let selectedColour = '#FFFFFF';
   let selectedTool = 'brush';
   
   let isDragging = false;
   
+  useEffect(() => {
+    const colourPicker = document.getElementById('colour-picker');
+    colourPicker.addEventListener('input', (e) => {
+      selectedColour = e.target.value;
+      console.log("Selected colour : ",selectedColour);
+    
+    });
+  
+  }, []);
+  
+  
   const PixelButton = ({x_coord,y_coord}) =>{
     return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = ""></button>
   }
-  
-  colourPicker.addEventListener('input', (e) => {
-    selectedColour = e.target.value;
-    console.log("Selected colour : ",selectedColour);
-  
-  });
   
   document.addEventListener('mousedown',(e) => {
     if (e.target.getAttribute("class") == 'paint-button'){
