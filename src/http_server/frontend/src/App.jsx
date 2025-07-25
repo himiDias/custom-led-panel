@@ -258,6 +258,11 @@ const PaintPage = ({socketRef}) => {
     socketRef.current.send(message);
   
   };
+  
+  const setTool = (e) => {
+    selectedTool = e.target.getAttribute('id');
+    console.log("set tool: ", selectedTool);
+  }
 
   const gridSize = 62;
   
@@ -278,7 +283,9 @@ const PaintPage = ({socketRef}) => {
             )}
         </div>
         <div id = "tool-selector">
-        tool selector
+          <h2>Tool Selector</h2>
+          <button id = "brush" onClick={setTool}>Brush</button>
+          <button id = "erase" onClick={setTool}>Erase</button>
         </div>
       </div>
       <div id = "save-options">
