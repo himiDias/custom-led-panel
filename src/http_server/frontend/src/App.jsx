@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   // change back to 'main', using diffreent for developing
-  const [currentPage, setCurrentPage] = useState('main');
+  const [currentPage, setCurrentPage] = useState('paint');
   
   const socketRef = useRef(null);
   
@@ -194,6 +194,7 @@ const SettingsPage = ({socketRef}) =>{
 
 const PaintPage = ({socketRef}) => {
 
+  const colourPicker = document.getElementById('colour-picker');
   let selectedColour = '#FFFFFF';
   let selectedTool = 'brush';
   
@@ -202,6 +203,12 @@ const PaintPage = ({socketRef}) => {
   const PixelButton = ({x_coord,y_coord}) =>{
     return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = ""></button>
   }
+  
+  colourPicker.addEventListener('input', (e) => {
+    selectedColour = e.target.value;
+    console.log("Selected colour : ",selectedColour);
+  
+  });
   
   document.addEventListener('mousedown',(e) => {
     if (e.target.getAttribute("class") == 'paint-button'){
@@ -273,7 +280,8 @@ const PaintPage = ({socketRef}) => {
       <h1 className = "screen-title">Paint</h1>
       <div id = "paint-options">
         <div id = "colour-selector">
-        colour selector
+          <h2>Colour Selector</h2>
+          <input id = "colour-picker" type="color"></input>
         </div>
         <div id = "paint-grid">
             {Array.from({ length:gridSize}, (_, y) => 
