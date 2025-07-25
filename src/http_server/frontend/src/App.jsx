@@ -197,11 +197,31 @@ const PaintPage = ({socketRef}) => {
   let selectedColour = '#FFFFFF';
   let selectedTool = 'brush';
   
+  let isDragging = false;
+  
   const PixelButton = ({x_coord,y_coord}) =>{
-    return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = "" onClick={handleSetPixel}></button>
+    return <button className = "paint-button" data-x = {x_coord} data-y = {y_coord} data-col = ""></button>
   }
   
-  const handleSetPixel = (e) =>{
+  document.addEventListener('mousedown',(e) => {
+    if (e.target.getAttribute("class") == 'paint-button'){
+      isDragging = true;
+      handleSetPixel(e);
+    }
+  
+  });
+  
+  document.addEventListener('mouseover',(e) => {
+    if (e.target.getAttribute("class") == 'paint-button' && isDragging){
+      handleSetPixel(e);
+    }
+  });
+  
+  document.addEventListener('mouseup', () =>{
+    isDragging = false;
+  });
+  
+  function handleSetPixel(e){
     
     if (selectedTool == 'brush'){
       e.target.setAttribute("data-col",selectedColour);
