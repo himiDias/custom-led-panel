@@ -251,6 +251,13 @@ const PaintPage = ({socketRef}) => {
     socketRef.current.send(message);
     
   }
+  
+  const handleBack = (e) => {
+    const message = JSON.stringify({type:'back-paint'});
+    console.log(message);
+    socketRef.current.send(message);
+  
+  };
 
   const gridSize = 62;
   
@@ -275,7 +282,7 @@ const PaintPage = ({socketRef}) => {
         </div>
       </div>
       <div id = "save-options">
-        <button>Back</button>
+        <button onClick={handleBack}>Back</button>
       </div>
     </div>
   )

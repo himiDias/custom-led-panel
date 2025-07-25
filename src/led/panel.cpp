@@ -178,9 +178,15 @@ bool on_scene_switch = true;
 			int x = std::stoi(x_str)+1;
 			int y = std::stoi(y_str)+1;
 			
+			rgb_matrix::Color colour(r,g,b);
+			
 			return [x,y,colour,&canvas]() {paint_e.setPixel(x,y,colour,canvas);};
 		}else if (type == "clearpixel-paint"){
 			//insert code for getting coordinates then clear pixel
+		}else if (type == "back-paint"){
+			scene = SCENE_MENU;
+			on_scene_switch = true;
+			server_commands_queue->push("{'switch_screen':'main'}");
 		}
 		
 		return []() {};
