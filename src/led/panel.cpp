@@ -183,6 +183,12 @@ bool on_scene_switch = true;
 			return [x,y,colour,&canvas]() {paint_e.setPixel(x,y,colour,canvas);};
 		}else if (type == "clearpixel-paint"){
 			//insert code for getting coordinates then clear pixel
+			std::string x_str = input_data["x"];
+			std::string y_str = input_data["y"];
+			int x = std::stoi(x_str)+1;
+			int y = std::stoi(y_str)+1;
+			
+			return [x,y,&canvas]() {paint_e.clearPixel(x,y,canvas);};
 		}else if (type == "back-paint"){
 			scene = SCENE_MENU;
 			on_scene_switch = true;
