@@ -15,6 +15,10 @@ Project structure is split into two main components:
 
 - `src/http_server` controls a websocket commuincation using **Crow** with a **REACT** Web server hosted on LAN.
 
+## Features ##
+
+
+
 ## Set up ##
 - run `make`
 - run `sudo ./bin/run_panel`
