@@ -1,0 +1,6 @@
+# Ignore object files
+*.o
+
+# Ignore executable
+bin/run_desk_panel
+
