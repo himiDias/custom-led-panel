@@ -17,34 +17,36 @@ Project structure is split into two main components:
 - `src/http_server` controls a websocket commuincation using **Crow** with a **REACT** Web server hosted on LAN.
 
 ## Features
+
 <div style="
   display: flex; 
   flex-wrap: wrap; 
-  gap: 20px; 
+  gap: 15px; 
   justify-content: center;
 ">
 
-  <figure style="text-align: center; margin: 0; max-width: 300px;">
-    <img src="/assets/panel_main.jpg" alt="LED Panel - Main Screen" style="width:100%; height:auto;">
-    <figcaption style="margin-top: 8px;">Main Screen of Panel</figcaption>
+  <figure style="text-align: center; margin: 0; max-width: 200px;">
+    <img src="/assets/panel_main.jpg" alt="LED Panel - Main Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
+    <figcaption style="margin-top: 6px; font-size: 0.9em;">Main Screen of Panel</figcaption>
   </figure>
 
-  <figure style="text-align: center; margin: 0; max-width: 300px;">
-    <img src="/assets/site_main.jpg" alt="Site - Main Screen" style="width:100%; height:auto;">
-    <figcaption style="margin-top: 8px;">Main Screen of Controller on Mobile</figcaption>
+  <figure style="text-align: center; margin: 0; max-width: 200px;">
+    <img src="/assets/site_main.jpg" alt="Site - Main Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
+    <figcaption style="margin-top: 6px; font-size: 0.9em;">Main Screen of Controller on Mobile</figcaption>
   </figure>
 
-  <figure style="text-align: center; margin: 0; max-width: 300px;">
-    <img src="/assets/site_settings.jpg" alt="Site - Settings Screen" style="width:100%; height:auto;">
-    <figcaption style="margin-top: 8px;">Settings Screen of Controller on Mobile</figcaption>
+  <figure style="text-align: center; margin: 0; max-width: 200px;">
+    <img src="/assets/site_settings.jpg" alt="Site - Settings Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
+    <figcaption style="margin-top: 6px; font-size: 0.9em;">Settings Screen of Controller on Mobile</figcaption>
   </figure>
 
-  <figure style="text-align: center; margin: 0; max-width: 300px;">
-    <img src="/assets/site_draw.jpg" alt="Site - Draw Screen" style="width:100%; height:auto;">
-    <figcaption style="margin-top: 8px;">Drawing Screen of Controller on Desktop</figcaption>
+  <figure style="text-align: center; margin: 0; max-width: 200px;">
+    <img src="/assets/site_draw.jpg" alt="Site - Draw Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
+    <figcaption style="margin-top: 6px; font-size: 0.9em;">Drawing Screen of Controller on Desktop</figcaption>
   </figure>
 
 </div>
+
 
 
 ## Set up
