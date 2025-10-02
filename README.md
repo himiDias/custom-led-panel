@@ -19,29 +19,28 @@ Project structure is split into two main components:
 ## Features
 
 <div style="display:flex; gap:10px">
-<div>
+<figure>
 <img src="/assets/panel_main.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
-<small>Main Screen of Panel</small>
-</div>
+<figcaption>Main Screen of Panel</figcaption>
+</figure>
 
-<div>
+<figure>
 <img src="/assets/site_main.jpg" alt = "Site - Main Screen" width = "300" height = "400">
-<small>Main Screen of Controller on Mobile</small>
-</div>
+<figcaption>Main Screen of Controller on Mobile</figcaption>
+</figure>
 
-<div>
+<figure>
 <img src="/assets/site_settings.jpg" alt = "Site - Settings Screen" width = "300" height = "400">
-<small>Settings Screen of Controller on Mobile</small>
-</div>
+<figcaption>Settings Screen of Controller on Mobile</figcaption>
+</figure>
 
-<div>
+<figure>
 <img src="/assets/site_draw.jpg" alt = "Site - Draw Screen" width = "300" height = "400">
-<small>Drawing Screen of Controller on Desktop</small>
-</div>
+<figcaption>Drawing Screen of Controller on Desktop</figcaption>
+</figure>
 
 </div>
 
- 
 ## Set up
 
 - run `make`
