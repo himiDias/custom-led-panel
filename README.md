@@ -18,14 +18,15 @@ Project structure is split into two main components:
 
 ## Features
 
-<img src="/assets/panel_main.jpg" alt = "LED Panel - Main Screen" width = "200" height = "200">
+<img src="/assets/panel_main.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
 
-![Control Site - Main Screen](/assets/site_main.jpg)
+<img src="/assets/site_main.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
 
-![Control Site - Main Screen](/assets/site_settings.jpg)
+<img src="/assets/site_settings.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
 
-![Control Site - Main Screen](/assets/site_draw.jpg)
+<img src="/assets/site_draw.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
 
+ 
 ## Set up
 
 - run `make`
