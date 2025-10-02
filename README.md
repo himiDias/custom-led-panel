@@ -17,29 +17,35 @@ Project structure is split into two main components:
 - `src/http_server` controls a websocket commuincation using **Crow** with a **REACT** Web server hosted on LAN.
 
 ## Features
+<div style="
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 20px; 
+  justify-content: center;
+">
 
-<div style="display:flex; gap:10px">
-<figure>
-<img src="/assets/panel_main.jpg" alt = "LED Panel - Main Screen" width = "300" height = "400">
-<figcaption>Main Screen of Panel</figcaption>
-</figure>
+  <figure style="text-align: center; margin: 0; max-width: 300px;">
+    <img src="/assets/panel_main.jpg" alt="LED Panel - Main Screen" style="width:100%; height:auto;">
+    <figcaption style="margin-top: 8px;">Main Screen of Panel</figcaption>
+  </figure>
 
-<figure>
-<img src="/assets/site_main.jpg" alt = "Site - Main Screen" width = "300" height = "400">
-<figcaption>Main Screen of Controller on Mobile</figcaption>
-</figure>
+  <figure style="text-align: center; margin: 0; max-width: 300px;">
+    <img src="/assets/site_main.jpg" alt="Site - Main Screen" style="width:100%; height:auto;">
+    <figcaption style="margin-top: 8px;">Main Screen of Controller on Mobile</figcaption>
+  </figure>
 
-<figure>
-<img src="/assets/site_settings.jpg" alt = "Site - Settings Screen" width = "300" height = "400">
-<figcaption>Settings Screen of Controller on Mobile</figcaption>
-</figure>
+  <figure style="text-align: center; margin: 0; max-width: 300px;">
+    <img src="/assets/site_settings.jpg" alt="Site - Settings Screen" style="width:100%; height:auto;">
+    <figcaption style="margin-top: 8px;">Settings Screen of Controller on Mobile</figcaption>
+  </figure>
 
-<figure>
-<img src="/assets/site_draw.jpg" alt = "Site - Draw Screen" width = "300" height = "400">
-<figcaption>Drawing Screen of Controller on Desktop</figcaption>
-</figure>
+  <figure style="text-align: center; margin: 0; max-width: 300px;">
+    <img src="/assets/site_draw.jpg" alt="Site - Draw Screen" style="width:100%; height:auto;">
+    <figcaption style="margin-top: 8px;">Drawing Screen of Controller on Desktop</figcaption>
+  </figure>
 
 </div>
+
 
 ## Set up
 
