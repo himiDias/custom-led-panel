@@ -45,6 +45,8 @@ The Paint Screen accessible by selecting Paintbrush Icon from LED (Desktop View)
 
 [![Watch demo video](https://img.youtube.com/vi/hyGGp2ifJjk/0.jpg)](https://youtu.be/hyGGp2ifJjk)
 
+- Click above to watch the Demonstration Video
+
 ## Set up
 
 - run `make`
