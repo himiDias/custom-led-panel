@@ -18,37 +18,7 @@ Project structure is split into two main components:
 
 ## Features
 
-<div style="
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  justify-items: center;
-">
-
-  <figure style="text-align: center; margin: 0; max-width: 180px;">
-    <img src="/assets/panel_main.jpg" alt="LED Panel - Main Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
-    <figcaption style="margin-top: 6px; font-size: 0.85em;">Main Screen of Panel</figcaption>
-  </figure>
-
-  <figure style="text-align: center; margin: 0; max-width: 180px;">
-    <img src="/assets/site_main.jpg" alt="Site - Main Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
-    <figcaption style="margin-top: 6px; font-size: 0.85em;">Main Screen of Controller on Mobile</figcaption>
-  </figure>
-
-  <figure style="text-align: center; margin: 0; max-width: 180px;">
-    <img src="/assets/site_settings.jpg" alt="Site - Settings Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
-    <figcaption style="margin-top: 6px; font-size: 0.85em;">Settings Screen of Controller on Mobile</figcaption>
-  </figure>
-
-  <figure style="text-align: center; margin: 0; max-width: 180px;">
-    <img src="/assets/site_draw.jpg" alt="Site - Draw Screen" style="width:100%; height:auto; border:1px solid #ccc; border-radius:6px;">
-    <figcaption style="margin-top: 6px; font-size: 0.85em;">Drawing Screen of Controller on Desktop</figcaption>
-  </figure>
-
-</div>
-
-
-
+<img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200">
 
 ## Set up
 
