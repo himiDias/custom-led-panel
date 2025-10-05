@@ -18,7 +18,10 @@ Project structure is split into two main components:
 
 ## Features
 
-<img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200"><img src = "/assets/site_main.jpg" alt = "Main screen on site" height ="400" width = "500">
+<img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200">
+ The start screen displayed on the LED when executing the program.
+<img src = "/assets/site_main.jpg" alt = "Main screen on site" height ="400" width = "500">
+The digital controller accessible via LAN (Mobile Landscape View)
 
 ## Set up
 
