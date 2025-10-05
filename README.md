@@ -18,9 +18,7 @@ Project structure is split into two main components:
 
 ## Features
 
-<img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200">
-
-<img src = "/assets/site_main.jpg" alt = "Main screen on site" height ="300" width = "200">
+<img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200"><img src = "/assets/site_main.jpg" alt = "Main screen on site" height ="300" width = "200">
 
 ## Set up
 
