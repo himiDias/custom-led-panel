@@ -24,9 +24,9 @@ Project structure is split into two main components:
 The digital controller accessible via LAN (Mobile Landscape View)
 <img src = "/assets/site_settings.jpg" alt = "Settings screen on site" height ="400" width = "500">
 The Settings Screen accessible by selecting Cog Icon from LED (Mobile Landscape View)
+
 - Allows users to set a custom status message
 - Decide whether to show Today's Date, Current Time or neither.
-
 
 ## Set up
 
