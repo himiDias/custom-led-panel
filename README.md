@@ -43,6 +43,8 @@ The Paint Screen accessible by selecting Paintbrush Icon from LED (Desktop View)
 - Click and Drag on the 64x64 grid to set LED's on and update in real-time.
 - Erase pixels
 
+[![Watch demo Video](https://youtube.com/shorts/hyGGp2ifJjk?feature=share/0/jpg)](https://youtube.com/shorts/hyGGp2ifJjk?feature=share)
+
 ## Set up
 
 - run `make`
