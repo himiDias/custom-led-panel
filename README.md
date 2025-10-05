@@ -20,6 +20,14 @@ Project structure is split into two main components:
 
 <img src = "/assets/panel_main.jpg" alt = "Main screen on panel" height ="300" width = "200">
  The start screen displayed on the LED when executing the program.
+
+- Shows a status message, default to "Set Status Message" at the top of panel
+- 4 Icons navigated to using the controller.
+- Cog : Settings
+- Paint Brush : Paint
+- Controller Icon : Games (Not yet implemented)
+- Star : Saved Screen Savers/Created Displays (Not yet implemented)
+
 <img src = "/assets/site_main.jpg" alt = "Main screen on site" height ="400" width = "500">
 The digital controller accessible via LAN (Mobile Landscape View)
 <img src = "/assets/site_settings.jpg" alt = "Settings screen on site" height ="400" width = "500">
@@ -27,6 +35,13 @@ The Settings Screen accessible by selecting Cog Icon from LED (Mobile Landscape 
 
 - Allows users to set a custom status message
 - Decide whether to show Today's Date, Current Time or neither.
+
+<img src = "/assets/site_draw.jpg" alt = "Paint screen on site" height ="400" width = "500">
+The Paint Screen accessible by selecting Paintbrush Icon from LED (Desktop View)
+
+- Allows users to select any colour within the RGB colour spectrum
+- Click and Drag on the 64x64 grid to set LED's on and update in real-time.
+- Erase pixels
 
 ## Set up
 
